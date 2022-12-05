@@ -1,0 +1,16 @@
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: litter
+build:
+  artifacts:
+    image: litter
+    context: litter-service
+    docker:
+      dockerfile: Dockerfile.production
+deploy:
+  kubectl:
+    manifests:
+      - ./k8s/ingress.yaml
+      - ./k8s/litter-service.yaml
+
