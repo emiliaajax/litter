@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: litter
-        image: litter
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter
         # image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter/litter
         # image: gitlab.lnu.se:5050/2dv013/student/eh222yn/part2-architecture/just-task-it-kubernetes/application-k8s/taskit # Update to your project url
         env:
