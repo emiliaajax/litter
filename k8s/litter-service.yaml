@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service.name: litter
+  name: litter
+spec:
+  type: NodePort # Using this to connect loadBalancer to in CSCloud
+  ports:
+    - name: "litter-port"
+      port: 8888
+      targetPort: 8080
+  selector:
+    deployment.name: taskit
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: litter
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment.name: litter
+  template:
+    metadata:
+      labels:
+        deployment.name: litter
+    spec:
+      containers:
+      - name: litter
+        image: litter
+        # image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter/litter
+        # image: gitlab.lnu.se:5050/2dv013/student/eh222yn/part2-architecture/just-task-it-kubernetes/application-k8s/taskit # Update to your project url
+        env:
+        - name: PORT
+          value: "8080"
+        - name: NODE_ENV
+          value: "production"
+        - name: NODE_PORT
+          value: "3000"
+        - name: BASE_URL
+          value: "/"
+        ports:
+          - containerPort: 8080
+      imagePullSecrets:
+      - name: regcred
