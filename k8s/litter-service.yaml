@@ -24,9 +24,6 @@ spec:
   replicas: 3
   strategy:
     type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 1
-      maxUnvailable: 0
   selector:
     matchLabels:
       deployment.name: litter
