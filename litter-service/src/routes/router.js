@@ -4,7 +4,7 @@ import express from 'express'
 
 export const router = express.Router()
 
-router.get('/', (req, res, next) => res.json({ "msg": "Hello, World! Test" }))
+router.get('/', (req, res, next) => res.json({ "msg": "Hello, World! Test!" }))
 
 // router.use('/api/v1', v1Router)
 
