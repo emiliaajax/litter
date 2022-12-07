@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
       - name: litter
-        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter:latest
         imagePullPolicy: Always
         env:
         - name: PORT
