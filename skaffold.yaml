@@ -13,4 +13,3 @@ deploy:
     manifests:
       - ./k8s/ingress.yaml
       - ./k8s/litter-service.yaml
-
