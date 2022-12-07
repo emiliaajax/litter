@@ -33,6 +33,7 @@ spec:
       containers:
       - name: litter
         image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter
+        imagePullPolicy: Always
         env:
         - name: PORT
           value: "8080"
