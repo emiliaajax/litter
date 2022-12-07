@@ -21,7 +21,7 @@ metadata:
   name: litter
   namespace: default
 spec:
-  replicas: 0
+  replicas: 2
   strategy:
     type: RollingUpdate
   selector:
