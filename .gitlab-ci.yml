@@ -46,7 +46,6 @@ deploy-staging:
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD
 
     - kubectl apply -f ./k8s/litter-service.yaml # We are skipping ingress for now
-    - kubectl rollout restart deployment
    # Debugging outputs after completion
     - kubectl get deployments
     - kubectl get pods
@@ -70,7 +69,6 @@ deploy:
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD
 
     - kubectl apply -f ./k8s/litter-service.yaml # We are skipping ingress for now
-    - kubectl rollout restart deployment
    # Debugging outputs after completion
     - kubectl get deployments
     - kubectl get pods
