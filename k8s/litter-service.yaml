@@ -5,7 +5,7 @@ metadata:
     service.name: litter
   name: litter
 spec:
-  type: NodePort # Using this to connect loadBalancer to in CSCloud
+  type: NodePort
   ports:
     - name: "litter-port"
       port: 8888
@@ -21,7 +21,7 @@ metadata:
   name: litter
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       deployment.name: litter
