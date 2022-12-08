@@ -21,7 +21,7 @@ metadata:
   name: litter
   namespace: default
 spec:
-  replicas: 4
+  replicas: 0
   strategy:
     type: Recreate
   selector:
