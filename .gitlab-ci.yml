@@ -6,6 +6,9 @@ stages:          # List of stages for jobs, and their order of execution
 
 build:
   stage: build
+  only:
+    - merge_requests
+    - main
   image:
     name: gcr.io/kaniko-project/executor:v1.9.0-debug
     entrypoint: [""]
