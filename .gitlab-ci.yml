@@ -31,16 +31,15 @@ build:
 
 deploy-staging:
   stage: integration-test
+  only:
+    - merge_requests
+    - main
   image:
     name: gcr.io/k8s-skaffold/skaffold:v2.0.0
     entrypoint: ['']
   environment:
     name: staging
     url: $LITTER_URL_STAGING # Set as environment variable. URL to your application. Ie HTTP://cscloud6-25.lnu.se
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  only:
-    - main
   script:
     - kubectl config get-contexts
    # Configure kubectl to use our own k8s cluster, you need to setup an Gitlab agent in you k8s kluster
@@ -58,6 +57,9 @@ deploy-staging:
 
 deploy:
   stage: deploy
+  only:
+    - merge_requests
+    - main
   image:
     name: gcr.io/k8s-skaffold/skaffold:v2.0.0
     entrypoint: ['']
@@ -67,8 +69,8 @@ deploy:
   when: manual
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
-  only:
-    - main
+      only:
+        - main
   script:
     - kubectl config get-contexts
    # Configure kubectl to use our own k8s cluster, you need to setup an Gitlab agent in you k8s kluster
