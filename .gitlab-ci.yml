@@ -23,9 +23,7 @@ unit-test-job-auth-service:
   script:
     - cd auth-service
     - npm install
-    - npm install mocha-junit-reporter
-    - npm run test --reporter mocha-junit-reporter
-    - cat ./test-results.xml
+    - npm run test
 
 # unit-test-job:   # This job runs in the test stage.
 #   stage: test    # It only starts when the job in the build stage completes successfully.
