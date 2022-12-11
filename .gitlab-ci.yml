@@ -38,9 +38,9 @@ deploy-staging:
     name: staging
     url: $LITTER_URL_STAGING # Set as environment variable. URL to your application. Ie HTTP://cscloud6-25.lnu.se
   rules:
-    if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    only:
-      - main
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  only:
+    - main
   script:
     - kubectl config get-contexts
    # Configure kubectl to use our own k8s cluster, you need to setup an Gitlab agent in you k8s kluster
@@ -66,9 +66,9 @@ deploy:
     url: $LITTER_URL # Set as environment variable. URL to your application. Ie HTTP://cscloud6-25.lnu.se
   when: manual
   rules:
-    if: $CI_PIPELINE_SOURCE == "merge_request_event"
-    only:
-      - main
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+  only:
+    - main
   script:
     - kubectl config get-contexts
    # Configure kubectl to use our own k8s cluster, you need to setup an Gitlab agent in you k8s kluster
