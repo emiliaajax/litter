@@ -23,7 +23,7 @@ unit-test-job-auth-service:
   script:
     - cd auth-service
     - npm install mocha chai jest-junit
-    - npx mocha --recursive --file-pattern "./tests/*.test.js" --reporter=jest-junit
+    - npx mocha './tests/*.test.js' --recursive --reporter=jest-junit
     - cat mocha-results.xml
 
 # unit-test-job:   # This job runs in the test stage.
