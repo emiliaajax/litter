@@ -5,7 +5,7 @@ import Home from './components/Home/Home.js'
 function App() {
   return (
     <Router>
-      <div className="App">
+      <div className="App" style={{ margin: '0 auto', maxWidth: '1200px' }}>
         <Routes>
           <Route 
             path='/' 

@@ -11,8 +11,6 @@ import SettingsIcon from '@mui/icons-material/Settings'
 // import { useDispatch } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 // import { logout, reset } from '../../features/auth/authSlice'
-import { Divider } from '@mui/material'
-import ShieldIcon from '@mui/icons-material/Shield'
 
 const SideBar = () => {
   // const dispatch = useDispatch()
@@ -26,15 +24,18 @@ const SideBar = () => {
   // }
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 280, bgcolor: 'background.paper' }}>
-      <List component="nav" aria-label="main mailbox folders">
+    <Box sx={{ width: '100%', paddingTop: '20px', maxWidth: '160px', bgcolor: 'background.paper' }}>
+      <List component="nav">
         <ListItemButton
           component='a'
           href='/'>          
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Hem" />
+          <ListItemText 
+            primary="Hem"
+            primaryTypographyProps={{ fontSize: '14px' }}
+          />
         </ListItemButton>
         <ListItemButton
           component='a'
@@ -42,7 +43,10 @@ const SideBar = () => {
           <ListItemIcon>
             <AccountCircleIcon />
           </ListItemIcon>
-          <ListItemText primary="Min profil" />
+          <ListItemText 
+            primary="Min profil"
+            primaryTypographyProps={{ fontSize: '14px' }}
+          />
         </ListItemButton>
         <ListItemButton
           component='a'
@@ -50,7 +54,10 @@ const SideBar = () => {
           <ListItemIcon>
             <EmailIcon />
           </ListItemIcon>
-          <ListItemText primary="Meddelanden" />
+          <ListItemText 
+            primary="Meddelanden"
+            primaryTypographyProps={{ fontSize: '14px' }}
+          />
         </ListItemButton>
         <ListItemButton
           component='a'
@@ -58,23 +65,20 @@ const SideBar = () => {
           <ListItemIcon>
             <SettingsIcon />
           </ListItemIcon>
-          <ListItemText primary="Inställningar" />
+          <ListItemText 
+            primary="Inställningar"
+            primaryTypographyProps={{ fontSize: '14px' }}
+          />
         </ListItemButton>
         <ListItemButton>
           {/* onClick={onLogout}> */}
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItemButton>
-        <Divider />
-        <ListItemButton
-          component='a'
-          href='/privacy'>
-          <ListItemIcon>
-            <ShieldIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sekretesspolicy" />
+          <ListItemText 
+            primary="Logout"
+            primaryTypographyProps={{ fontSize: '14px' }}
+          />
         </ListItemButton>
       </List>
     </Box>

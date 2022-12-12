@@ -8,7 +8,7 @@ const BaseLayout = (props) => {
     <Stack 
       direction='row' 
       spacing={1} 
-      sx={{ paddingTop: '20px', paddingBottom: '10px'}}>
+      sx={{ paddingTop: '20px', paddingBottom: '10px', paddingLeft: '20px' }}>
       <SideBar />
       {children}
     </Stack>
