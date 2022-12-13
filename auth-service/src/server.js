@@ -1,6 +1,7 @@
 import express from 'express'
 import helmet from 'helmet'
 import logger from 'morgan'
+import { router } from './routes/router.js'
 
 /**
  * Express server.
@@ -9,13 +10,16 @@ const main = async () => {
   const app = express()
 
   // Enable application/json.
-  app.use(express.json({ limit: '500kb' }))
+  app.use(express.json())
 
   // Helmet HTTP headers.
   app.use(helmet())
 
   // Logger middleware.
   app.use(logger('dev'))
+
+  // Registers routes.
+  app.use('/', router)
 
   // Handle errors.
   app.use((err, req, res, next) => {
