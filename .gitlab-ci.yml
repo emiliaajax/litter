@@ -31,6 +31,7 @@ lint-test-auth-service:
   image: node:18-alpine
   script:
     - cd auth-service
+    - ls
     - npm install
     - npm run lint
 
