@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader, Stack, Typography } from "@mui/material"
 import { Box } from "@mui/system"
-import PeopleOutlineIcon from '@mui/icons-material/PeopleOutline'
 import profileImage from './profile-image.png'
 import Avatar from '@mui/material/Avatar'
 // import { useDispatch } from "react-redux";
@@ -19,7 +18,7 @@ const LitCard = (props) => {
           sx={{ paddingBottom: '0px' }}
           avatar={
             <Avatar sx={{ bgcolor: 'white' }}>
-              <img src={profileImage} width='35px'></img>
+              <img src={profileImage} alt='Profile of user' width='35px'></img>
             </Avatar>
           }
           title={lit.author}
