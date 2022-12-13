@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node src/server.js",
     "test": "node ./node_modules/mocha/bin/mocha.js ./tests/*.test.js",
-    "lint": "standard ./src/**/*.js"
+    "lint": "standard src/**/*.js"
   },
   "license": "MIT",
   "private": true,
