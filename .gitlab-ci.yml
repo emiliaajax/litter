@@ -20,6 +20,7 @@ build:
 
 unit-test-auth-service:
   stage: test
+  image: node:18-alpine
   script:
     - cd auth-service
     - npm install
@@ -27,6 +28,7 @@ unit-test-auth-service:
 
 lint-test-auth-service:
   stage: test
+  image: node:18-alpine
   script:
     - cd auth-service
     - npm install
