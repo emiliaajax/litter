@@ -30,6 +30,7 @@ lint-test-auth-service:
   stage: test
   image: node:18-alpine
   script:
+    - ls
     - cd auth-service
     - ls
     - npm install
