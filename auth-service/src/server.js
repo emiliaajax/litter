@@ -25,7 +25,7 @@ const main = async () => {
     if (req.app.get('env') !== 'development') {
       return res.status(err.status).json({
         message: err.message,
-        status: err.status,
+        status: err.status
       })
     }
     return res.status(err.status).json(err)
