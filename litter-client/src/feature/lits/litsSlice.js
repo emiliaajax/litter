@@ -4,7 +4,8 @@ import litsService from './litsService'
 export const initialState = {
   isError: false,
   isSuccess: false,
-  message: ''
+  message: '',
+  isPending: false
 }
 
 export const getHundredLatestLits = createAsyncThunk('lits/latest', async (thunkAPI) => {
