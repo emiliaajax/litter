@@ -41,6 +41,20 @@ schema.pre('save', async function () {
   }
 })
 
+// User authentication.
+schema.static('authenticate', async function (email, password) {
+  try {
+    const user = await this.findOne({ email })
+    if (!user) throw new Error('Invalid credentials.')
+    const isValidPassword = await bcrypt.compare(password, user.password)
+    if (!isValidPassword) throw new Error('Invalid credentials.')
+    return user
+  } catch (error) {
+    error.code = 401
+    throw error
+  }
+})
+
 const UserModel = mongoose.model('User', schema)
 
 export default UserModel
