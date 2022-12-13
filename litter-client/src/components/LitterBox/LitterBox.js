@@ -5,7 +5,7 @@ import { Stack } from "@mui/material"
 import LitCard from "../LitCard/LitCard.js"
 // import CircularProgress from '@mui/material/CircularProgress';
 
-const Feed = () => {
+const LitterBox = () => {
 
   const lits = [
     {
@@ -59,4 +59,4 @@ const Feed = () => {
   )
 }
 
-export default Feed
+export default LitterBox

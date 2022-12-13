@@ -1,4 +1,4 @@
-import { Avatar, Card, CardHeader, Divider, Stack, Typography } from "@mui/material"
+import { Avatar, Card, CardHeader, Stack } from "@mui/material"
 // import { useEffect } from "react"
 // import { useDispatch, useSelector } from "react-redux"
 // import { getAllActiveUsers } from "../../features/userProfiles/userProfilesSlice"

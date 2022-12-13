@@ -4,10 +4,9 @@ import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
 import HomeIcon from '@mui/icons-material/Home'
-import EmailIcon from '@mui/icons-material/Email'
 import LogoutIcon from '@mui/icons-material/Logout'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import SettingsIcon from '@mui/icons-material/Settings'
+import StarIcon from '@mui/icons-material/Star'
 // import { useDispatch } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 // import { logout, reset } from '../../features/auth/authSlice'
@@ -24,7 +23,7 @@ const SideBar = () => {
   // }
 
   return (
-    <Box sx={{ width: '100%', paddingTop: '20px', maxWidth: '160px', bgcolor: 'background.paper' }}>
+    <Box sx={{ width: '100%', paddingTop: '20px', maxWidth: '190px', bgcolor: 'background.paper' }}>
       <List component="nav">
         <ListItemButton
           component='a'
@@ -33,7 +32,18 @@ const SideBar = () => {
             <HomeIcon />
           </ListItemIcon>
           <ListItemText 
-            primary="Hem"
+            primary="Litter Box"
+            primaryTypographyProps={{ fontSize: '14px' }}
+          />
+        </ListItemButton>
+        <ListItemButton
+          component='a'
+          href='/explore'>
+          <ListItemIcon>
+            <StarIcon />
+          </ListItemIcon>
+          <ListItemText 
+            primary="Explore"
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
@@ -44,22 +54,11 @@ const SideBar = () => {
             <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText 
-            primary="Min profil"
+            primary="Pedigree Chart"
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
-        <ListItemButton
-          component='a'
-          href='/messages'>
-          <ListItemIcon>
-            <EmailIcon />
-          </ListItemIcon>
-          <ListItemText 
-            primary="Meddelanden"
-            primaryTypographyProps={{ fontSize: '14px' }}
-          />
-        </ListItemButton>
-        <ListItemButton
+        {/* <ListItemButton
           component='a'
           href='/settings'>
           <ListItemIcon>
@@ -69,14 +68,14 @@ const SideBar = () => {
             primary="Inställningar"
             primaryTypographyProps={{ fontSize: '14px' }}
           />
-        </ListItemButton>
+        </ListItemButton> */}
         <ListItemButton>
           {/* onClick={onLogout}> */}
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
           <ListItemText 
-            primary="Logout"
+            primary="Log out"
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
