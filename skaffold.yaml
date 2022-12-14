@@ -19,7 +19,7 @@ deploy:
       - ./k8s/litter-service.yaml
       - ./auth-service/k8s/auth-deployment.yaml
       - ./auth-service/k8s/auth-service.yaml
-      - ./user-database/k8s/mongodb-service.yaml
-      - ./user-database/k8s/mongodb-deployment.yaml
-      - ./user-database/k8s/mongodb-pvc.yaml
-      - ./user-database/k8s/mongodb-pv.yaml
+      - ./database/users/k8s/mongodb-service.yaml
+      - ./database/users/k8s/mongodb-deployment.yaml
+      - ./database/users/k8s/mongodb-pvc.yaml
+      - ./database/users/k8s/mongodb-pv.yaml
