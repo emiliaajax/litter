@@ -2,11 +2,14 @@ import express from 'express'
 import helmet from 'helmet'
 import logger from 'morgan'
 import { router } from './routes/router.js'
+import { connectToDatabase } from './config/mongoose.js'
 
 /**
  * Express server.
  */
 const main = async () => {
+  await connectToDatabase()
+
   const app = express()
 
   // Enable application/json.
