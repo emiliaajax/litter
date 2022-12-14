@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import litsService from './litsService'
+import litsService from './litsService.js'
 
 export const initialState = {
   isError: false,
@@ -17,7 +17,7 @@ export const getHundredLatestLits = createAsyncThunk('lits/latest', async (thunk
   }
 })
 
-export const getLitsById = createAsyncThunk('lits/id', async (thunkAPI, id) => {
+export const getLitsById = createAsyncThunk('lits/id', async (id, thunkAPI) => {
   try {
     return await litsService.getLitsById(id)
   } catch (error) {
@@ -35,7 +35,7 @@ export const getAllLitsForLitterBox = createAsyncThunk('lits/all', async (thunkA
   }
 })
 
-export const postLit = createAsyncThunk('lits/create', async (thunkAPI, litData) => {
+export const postLit = createAsyncThunk('lits/create', async (litData, thunkAPI) => {
   try {
     return await litsService.postLit(litData)
   } catch (error) {

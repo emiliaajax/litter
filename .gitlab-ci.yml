@@ -32,6 +32,14 @@ build:
 #     - sleep 2
 #     - echo "No lint issues found."
 
+lint-test-lits-service:
+  stage: test
+  image: node:18-alpine
+  script:
+    - cd lits-service
+    - npm install
+    - npm run lint
+
 deploy-staging:
   stage: integration-test
   only:
