@@ -2,6 +2,8 @@ import axios from 'axios'
 
 const LITS_SERVICE_URL = process.env.REACT_APP_USER_PROFILES_API
 
+const user = JSON.parse(localStorage.getItem('user'))
+
 const litsAxios = axios.create({
   baseURL: LITS_SERVICE_URL,
   headers: {
@@ -27,6 +29,15 @@ const getLitsById = async (id) => {
   return await response.data
 }
 
+const getAllLitsForLitterBox = async () => {
+  const lits = []
+  for (const id of user.followings) {
+    lits.push(await getLitsById(id))
+  }
+
+  return lits.flat()
+}
+
 const postLit = async (litData) => {
   const response = await axios.post(LITS_SERVICE_URL + 'create', litData)
 
@@ -39,6 +50,7 @@ const postLit = async (litData) => {
 const litsService = {
   getHundredLatestLits,
   getLitsById,
+  getAllLitsForLitterBox,
   postLit
 }
 

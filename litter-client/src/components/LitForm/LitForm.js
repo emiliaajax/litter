@@ -1,7 +1,7 @@
 import { Button, Grid, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { postLit } from '../../feature/lits/litsSlice.js'
+import { postLit, getAllLitsForLitterBox } from '../../feature/lits/litsSlice.js'
 
 function LitForm () {
   const dispatch = useDispatch()
@@ -10,6 +10,17 @@ function LitForm () {
   })
   const { text } = formData
 
+  useEffect(() => {
+    if (isSuccess && posted) {
+      dispatch(getAllLitsForLitterBox())
+    }
+
+    if(isError) {
+      toast.error(message)
+    }
+
+    dispatch(reset())
+  }, [isError, isSuccess, message, navigate, dispatch, updated]) 
 
   const onChange = (event) => {
     const numberOfWords = event.target.value.trim().split(' ').length
@@ -43,7 +54,6 @@ function LitForm () {
             size='small'
             value={text}
             fullWidth
-            // inputProps={{ minLength: 1, maxLength: 256 }}
             onChange={onChange}
           />
         </Grid>

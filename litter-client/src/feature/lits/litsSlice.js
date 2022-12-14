@@ -26,6 +26,15 @@ export const getLitsById = createAsyncThunk('lits/id', async (thunkAPI, id) => {
   }
 })
 
+export const getAllLitsForLitterBox = createAsyncThunk('lits/all', async (thunkAPI) => {
+  try {
+    return await litsService.getAllLitsForLitterBox()
+  } catch (error) {
+    const message = error.response.data.message || (error.response && error.response.data && error.response.message) || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const postLit = createAsyncThunk('lits/create', async (thunkAPI, litData) => {
   try {
     return await litsService.postLit(litData)
@@ -44,6 +53,7 @@ export const litsSlice = createSlice({
       state.isSuccess = false
       state.message = ''
       state.isPending = false
+      state.isPosted = false
     }
   },
   extraReducers: (builder) => {
@@ -79,16 +89,34 @@ export const litsSlice = createSlice({
       .addCase(getLitsById.pending, (state) => {
         state.isPending = true
       })
+      .addCase(getAllLitsForLitterBox.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.lits = action.payload
+        state.isPending = false
+      })
+      .addCase(getAllLitsForLitterBox.rejected, (state, action) => {
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.payload
+        state.lits = null
+        state.isPending = false
+      })
+      .addCase(getAllLitsForLitterBox.pending, (state, action) => {
+        state.isPending = true
+      })
       .addCase(postLit.fulfilled, (state) => {
         state.isSuccess = true
         state.isError = false
         state.isPending = false
+        state.isPosted = true
       })
       .addCase(postLit.rejected, (state, action) => {
         state.isError = true
         state.message = action.payload
         state.isSuccess = false
         state.isPending = false
+        state.isPosted = false
       })
   }
 })
