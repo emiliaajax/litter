@@ -11,7 +11,7 @@ export class AuthController {
 
   register (req, res, next) {
     try {
-      res.json({ message: 'Auth login' })
+      res.json({ message: 'Auth register' })
     } catch (err) {
       next(createError(500))
     }
