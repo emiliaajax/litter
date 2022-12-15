@@ -1,3 +1,10 @@
+/**
+ * Lits router.
+ *
+ * @author Oliwer Ellréus <oe222ez@student.lnu.se>
+ * @version 1.0.0
+ */
+
 import express from 'express'
 import createError from 'http-errors'
 
