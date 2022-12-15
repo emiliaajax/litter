@@ -10,7 +10,7 @@ import createError from 'http-errors'
 export class AuthController {
   login (req, res, next) {
     try {
-      fetch('http://auth-service/api/auth/login', {
+      fetch('http://auth-service/api/v1/auth/login', {
         method: 'POST',
         body: req.body
       })
@@ -33,7 +33,7 @@ export class AuthController {
 
   register (req, res, next) {
     try {
-      fetch('http://auth-service/api/auth/register', {
+      fetch('http://auth-service/api/v1/auth/register', {
         method: 'POST',
         body: req.body
       })
