@@ -45,6 +45,9 @@ export class LitsController {
     try {
       fetch('http://lits-service/lists/api/v1/lits/', {
         method: 'POST',
+        headers: {
+          authorization: req.headers.authorization
+        },
         body: req.body
       })
         .then(response => {
