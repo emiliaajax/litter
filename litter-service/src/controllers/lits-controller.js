@@ -13,6 +13,8 @@ export class LitsController {
           } else {
             next(createError(data.status))
           }
+        }).catch(err => {
+          next(createError(err))
         })
     } catch (err) {
       next(createError(500))
@@ -31,6 +33,8 @@ export class LitsController {
           } else {
             next(createError(data.status))
           }
+        }).catch(err => {
+          next(createError(err))
         })
     } catch (err) {
       next(createError(500))
@@ -52,6 +56,8 @@ export class LitsController {
           } else {
             next(createError(data.status))
           }
+        }).catch(err => {
+          next(createError(err))
         })
     } catch (err) {
       next(createError(500))
