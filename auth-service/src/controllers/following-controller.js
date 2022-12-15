@@ -68,7 +68,7 @@ export class FollowingController {
       // Cannot change another users followings.
       if (req.user.id !== req.params.id) return next(createError(403))
 
-      const user = await UserModel.findOne({ _id: req.params.id }).where('followings').in(req.body.id)
+      const user = await UserModel.findOne({ _id: req.user.id }).where('followings').in(req.body.id)
       if (!user) return next(createError(404))
       await user.followings.remove(req.body.id)
       await user.save()
