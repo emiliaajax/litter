@@ -11,6 +11,9 @@ export const connectToDatabase = async () => {
     .on('connected', () => console.log('MongoDB connected.'))
     .on('disconnected', () => console.error('MongoDB disconnected.'))
 
+  // Prepare for mongoose 7 changes.
+  mongoose.set('strictQuery', false)
+
   process.on('SIGINT', () => {
     mongoose.connection.close(() => {
       console.error('MongoDB disconnected due to application termination.')
