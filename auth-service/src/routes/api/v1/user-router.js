@@ -17,11 +17,11 @@ const publicKey = Buffer.from(process.env.JWT_PUBLIC_KEY || '', 'base64').toStri
  */
 function authenticateJWT (req, res, next) {
   if (!req.headers.authorization) return next(createError(401))
-  const [ type, token ] = req.headers.authorization?.split(' ')
+  const [type, token] = req.headers.authorization?.split(' ')
   if (!type || type !== 'Bearer') return next(createError(401))
 
   try {
-    const payload = jwt.verify(token, publicKey, {algorithm: 'RS256'})
+    const payload = jwt.verify(token, publicKey, { algorithm: 'RS256' })
     req.user = { id: payload.id }
   } catch (err) {
     console.log(err)
@@ -34,6 +34,6 @@ function authenticateJWT (req, res, next) {
 router.post('/:id/followings',
   authenticateJWT,
   (req, res, next) => controller.create(req, res, next)
-  )
+)
 
 router.get('/:id/followings', (req, res, next) => controller.findAll(req, res, next))
