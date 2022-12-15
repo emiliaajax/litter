@@ -24,7 +24,7 @@ try {
   app.use(express.json())
 
   // Registers routes.
-  app.use('/', router)
+  app.use('/lits', router)
 
   // Error handler.
   app.use(function (err, req, res, next) {

@@ -2,45 +2,48 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    service.name: client
-  name: client
+    service.name: lits
+  name: lits
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-    - name: "client-port"
+    - name: "lits-port"
       port: 8888
       targetPort: 8080
   selector:
-    deployment.name: client
+    deployment.name: lits
 status:
   loadBalancer: {}
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: client
+  name: lits
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      deployment.name: client
+      deployment.name: lits
   template:
     metadata:
       labels:
-        deployment.name: client
+        deployment.name: lits
     spec:
       containers:
-      - name: client
-        image: client
-        imagePullPolicy: Never
+      - name: lits
+        image: lits
         env:
+        - name: DB_CONNECTION_STRING
+          value: "mongodb://mongodb-lits:27017/lits"
         - name: PORT
           value: "8080"
+        - name: NODE_ENV
+          value: "production"
         - name: NODE_PORT
-          value: "3000"
-        - name: REACT_APP_LITS_API
-          value: "/lits/api/v1/lits/"
+          value: "3001"
+        - name: BASE_URL
+          value: "/"
         ports:
           - containerPort: 8080
       imagePullSecrets:

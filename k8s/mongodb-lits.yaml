@@ -1,0 +1,80 @@
+# This service is created to be able to tunnel in to MongoDB in development. In production the ingress server
+# should not expose this service.
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service.name: mongodb-lits
+  name: mongodb-lits
+spec:
+  ports:
+    - name: "27017"
+      port: 27017
+      targetPort: 27017
+  selector:
+    deployment.name: mongodb-lits
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    deployment.name: mongodb-lits
+  name: mongodb-lits
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment.name: mongodb-lits
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        deployment.name: mongodb-lits
+    spec:
+      containers:
+        - image: mongo:latest
+          name: mongodb-lits
+          ports:
+            - containerPort: 27017
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/db
+              name: mongodb-lits-claim
+      restartPolicy: Always
+      volumes:
+        - name: mongodb-lits-claim
+          persistentVolumeClaim:
+            claimName: mongodb-lits-claim
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-lits-volume
+  labels:
+    type: local
+spec:
+  storageClassName: ""
+  capacity:
+    storage: 100Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/data/db"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    persistentvolumeclaim.name: mongodb-lits-claim
+  name: mongodb-lits-claim
+spec:
+  volumeName: mongodb-lits-volume
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
