@@ -3,12 +3,16 @@ import createError from 'http-errors'
 export class LitsController {
   async getLatestLits (req, res, next) {
     try {
-      fetch('http://lits-service/lists/api/v1/lits') // Get 100 latest lits
+      fetch('http://lits-service/lists/api/v1/lits') // 100 latest lits
         .then(response => {
-          return response.json()
+          return { json: response.json(), status: response.status }
         })
-        .then(json => {
-          res.json(json)
+        .then(data => {
+          if (data.status === 200) {
+            res.json(data.json)
+          } else {
+            next(createError(data.status))
+          }
         })
     } catch (err) {
       next(createError(500))
@@ -19,10 +23,14 @@ export class LitsController {
     try {
       fetch(`http://lits-service/lists/api/v1/lits/${req.params.id}`)
         .then(response => {
-          return response.json()
+          return { json: response.json(), status: response.status }
         })
-        .then(json => {
-          res.json(json)
+        .then(data => {
+          if (data.status === 200) {
+            res.json(data.json)
+          } else {
+            next(createError(data.status))
+          }
         })
     } catch (err) {
       next(createError(500))
@@ -36,10 +44,14 @@ export class LitsController {
         body: req.body
       })
         .then(response => {
-          return { response: response.json(), status: response.status }
+          return { json: response.json(), status: response.status }
         })
         .then(data => {
-          res.status(data.status).json(data.response)
+          if (data.status === 201) {
+            res.status(data.status).json(data.json)
+          } else {
+            next(createError(data.status))
+          }
         })
     } catch (err) {
       next(createError(500))
