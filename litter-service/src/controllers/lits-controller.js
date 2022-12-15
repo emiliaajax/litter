@@ -17,7 +17,7 @@ export class LitsController {
 
   getLitById (req, res, next) {
     try {
-      fetch(`http://lits-service/lists/api/v1/lits/${req.params.id}`) // Get 100 latest lits
+      fetch(`http://lits-service/lists/api/v1/lits/${req.params.id}`)
         .then(response => {
           return response.json()
         })
@@ -31,12 +31,18 @@ export class LitsController {
 
   createLit (req, res, next) {
     try {
-      res.json({ message: 'Create Lit' })
+      fetch('http://lits-service/lists/api/v1/lits/', {
+        method: 'POST',
+        body: req.body
+      })
+        .then(response => {
+          return { response: response.json(), status: response.status }
+        })
+        .then(data => {
+          res.status(data.status).json(data.response)
+        })
     } catch (err) {
       next(createError(500))
     }
   }
 }
-
-
-// http://lits-service/lists/api/v1/lits
