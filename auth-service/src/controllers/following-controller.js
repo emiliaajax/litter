@@ -14,12 +14,11 @@ export class FollowingController {
    */
   async create (req, res, next) {
     try {
-      // Cannot change another users followings.
+      // Cannot change another users followings or follow yourself.
       if (req.user.id !== req.params.id) return next(createError(403))
-      // Cannot follow yourself.
       if (req.user.id === req.body.id) return next(createError(400))
-      const user = await UserModel.findOne({ _id: req.params.id }).where('followings').nin(req.body.id)
-      // Cannot follow the same user multiple times.
+
+      const user = await UserModel.findOne({ _id: req.user.id }).where('followings').nin(req.body.id)
       if (!user) return next(createError(409))
       const followUser = await UserModel.findOne({ _id: req.body.id })
       if (!followUser) return next(createError(404))
