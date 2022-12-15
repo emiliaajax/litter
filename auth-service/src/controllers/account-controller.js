@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken'
 import createError from 'http-errors'
 import UserModel from '../models/user.js'
 
-const privateKey = process.env.JWT_PRIVATE_KEY
+const privateKey = Buffer.from(process.env.JWT_PRIVATE_KEY, 'base64').toString('utf-8')
 
 /**
  * Account controller.
