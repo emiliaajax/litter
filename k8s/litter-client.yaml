@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    service.name: client
+  name: client
+spec:
+  type: NodePort
+  ports:
+    - name: "client-port"
+      port: 8888
+      targetPort: 8080
+  selector:
+    deployment.name: client
+status:
+  loadBalancer: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      deployment.name: client
+  template:
+    metadata:
+      labels:
+        deployment.name: client
+    spec:
+      containers:
+      - name: client
+        image: client
+        imagePullPolicy: Never
+        env:
+        - name: PORT
+          value: "8080"
+        - name: NODE_PORT
+          value: "3000"
+        - name: REACT_APP_LITS_API
+          value: "/api/v1/lits/"
+        ports:
+          - containerPort: 8080
+      imagePullSecrets:
+      - name: regcred

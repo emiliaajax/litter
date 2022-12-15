@@ -4,12 +4,12 @@ metadata:
   name: litter
 build:
   artifacts:
-    image: litter
-    context: litter-service
+  - image: client
+    context: litter-client
     docker:
       dockerfile: Dockerfile.production
 deploy:
   kubectl:
     manifests:
       - ./k8s/ingress.yaml
-      - ./k8s/litter-service.yaml
+      - ./k8s/litter-client.yaml

@@ -12,6 +12,6 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: litter
+                name: client
                 port:
                   number: 8888
