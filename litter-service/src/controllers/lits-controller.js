@@ -1,9 +1,15 @@
 import createError from 'http-errors'
 
 export class LitsController {
-  getLatestLits (req, res, next) {
+  async getLatestLits (req, res, next) {
     try {
-      res.json({ message: 'latest lits' })
+      fetch('http://lits-service/lists/api/v1/lits') // Get 100 latest lits
+        .then(response => {
+          return response.json()
+        })
+        .then(json => {
+          res.json(json)
+        })
     } catch (err) {
       next(createError(500))
     }
@@ -11,7 +17,13 @@ export class LitsController {
 
   getLitById (req, res, next) {
     try {
-      res.json({ message: 'lit by id' })
+      fetch(`http://lits-service/lists/api/v1/lits/${req.params.id}`) // Get 100 latest lits
+        .then(response => {
+          return response.json()
+        })
+        .then(json => {
+          res.json(json)
+        })
     } catch (err) {
       next(createError(500))
     }
