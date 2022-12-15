@@ -36,4 +36,9 @@ router.post('/:id/followings',
   (req, res, next) => controller.create(req, res, next)
 )
 
+router.delete('/:id/followings',
+  authenticateJWT,
+  (req, res, next) => controller.remove(req, res, next)
+)
+
 router.get('/:id/followings', (req, res, next) => controller.findAll(req, res, next))
