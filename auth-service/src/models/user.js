@@ -3,6 +3,14 @@ import mongoose from 'mongoose'
 import validator from 'validator'
 
 const schema = new mongoose.Schema({
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: [3, 'The username must be a minimum length of 3 characters.'],
+    maxlength: [36, 'The username must not be longer than 36 characters'],
+    trim: true
+  },
   email: {
     type: String,
     required: [true, 'Email required.'],
@@ -17,7 +25,11 @@ const schema = new mongoose.Schema({
     minlength: [10, 'Password must be at least 10 characters long.'],
     maxlength: [200, 'Password length cannot exceed 200 characters.'],
     required: [true, 'Password required.']
-  }
+  },
+  followings: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 })
 
 // Schema options.
