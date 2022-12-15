@@ -1,0 +1,132 @@
+{
+	"info": {
+		"_postman_id": "b532f41d-b03e-477f-a4ee-1b89ba99848d",
+		"name": "Litter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13619883"
+	},
+	"item": [
+		{
+			"name": "lits-service",
+			"item": [
+				{
+					"name": "Latest Lits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/litter-service/api/v1/lits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"litter-service",
+								"api",
+								"v1",
+								"lits"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get lit by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/litter-service/api/v1/lits/:8456184",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"litter-service",
+								"api",
+								"v1",
+								"lits",
+								":8456184"
+							],
+							"variable": [
+								{
+									"key": "8456184",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create lit",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/litter-service/api/v1/lits",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"litter-service",
+								"api",
+								"v1",
+								"lits"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "auth-service",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/litter-service/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"litter-service",
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/litter-service/api/auth/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"litter-service",
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
