@@ -44,9 +44,35 @@ export class FollowingController {
   async findAll (req, res, next) {
     try {
       const user = await UserModel.findOne({ _id: req.params.id })
-      if (!user) next(createError(404))
+      if (!user) return next(createError(404))
       const followings = user.followings
       res.status(200).json({ followings })
+    } catch (error) {
+      let err = error
+      if (err?.kind === 'ObjectId') {
+        err = createError(404)
+      }
+      next(err)
+    }
+  }
+
+  /**
+   * Removes a following from a user.
+   *
+   * @param {object} req The request object.
+   * @param {object} res The response object.
+   * @param {Function} next The next middleware.
+   */
+  async remove (req, res, next) {
+    try {
+      // Cannot change another users followings.
+      if (req.user.id !== req.params.id) return next(createError(403))
+
+      const user = await UserModel.findOne({ _id: req.params.id }).where('followings').in(req.body.id)
+      if (!user) return next(createError(404))
+      await user.followings.remove(req.body.id)
+      await user.save()
+      res.status(200).json({ id: user.id })
     } catch (error) {
       let err = error
       if (err?.kind === 'ObjectId') {
