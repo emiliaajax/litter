@@ -10,7 +10,7 @@ import createError from 'http-errors'
 export class LitsController {
   async getLatestLits (req, res, next) {
     try {
-      fetch('http://lits-service/lists/api/v1/lits') // 100 latest lits
+      fetch('http://lits-service/lits/api/v1/lits') // 100 latest lits
         .then(response => {
           return { json: response.json(), status: response.status }
         })
@@ -30,7 +30,7 @@ export class LitsController {
 
   getLitById (req, res, next) {
     try {
-      fetch(`http://lits-service/lists/api/v1/lits/${req.params.id}`)
+      fetch(`http://lits-service/lits/api/v1/lits/${req.params.id}`)
         .then(response => {
           return { json: response.json(), status: response.status }
         })
@@ -50,7 +50,7 @@ export class LitsController {
 
   createLit (req, res, next) {
     try {
-      fetch('http://lits-service/lists/api/v1/lits', {
+      fetch('http://lits-service/lits/api/v1/lits', {
         method: 'POST',
         headers: {
           authorization: req.headers.authorization
