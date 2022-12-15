@@ -47,6 +47,3 @@ export class AuthController {
     }
   }
 }
-
-// auth-service/api/auth/login
-// auth-service/api/auth/register
