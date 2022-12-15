@@ -4,7 +4,7 @@ metadata:
   name: litter
 build:
   artifacts:
-    image: litter
+  - image: litter
     context: litter-service
     docker:
       dockerfile: Dockerfile.production
