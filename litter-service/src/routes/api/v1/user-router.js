@@ -14,7 +14,9 @@ export const router = express.Router()
 
 const controller = new UserController()
 
-// router.post('/login', (req, res, next) => controller.login(req, res, next))
-// router.post('/register', (req, res, next) => controller.register(req, res, next))
+router.get('/:id/followings', (req, res, next) => controller.getAllUserFollowings(req, res, next))
+router.post('/:id/followings', (req, res, next) => controller.createFollowing(req, res, next))
+router.delete('/:id/followings', (req, res, next) => controller.removeFollowing(req, res, next))
+
 
 router.use('*', (req, res, next) => next(createError(404)))
