@@ -35,7 +35,7 @@ export class LitsController {
       let status
       fetch(`http://lits:8888/lits/api/v1/lits/${req.params.id}`)
         .then(response => {
-          status = response.status 
+          status = response.status
           return response.json()
         })
         .then(json => {

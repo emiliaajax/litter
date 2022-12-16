@@ -18,5 +18,4 @@ router.get('/:id/followings', (req, res, next) => controller.getAllUserFollowing
 router.post('/:id/followings', (req, res, next) => controller.createFollowing(req, res, next))
 router.delete('/:id/followings', (req, res, next) => controller.removeFollowing(req, res, next))
 
-
 router.use('*', (req, res, next) => next(createError(404)))
