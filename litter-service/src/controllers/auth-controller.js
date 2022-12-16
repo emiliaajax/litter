@@ -10,18 +10,20 @@ import createError from 'http-errors'
 export class AuthController {
   login (req, res, next) {
     try {
-      fetch('http://auth-service/api/v1/auth/login', {
+      let status
+      fetch('http://auth-service:8888/api/v1/auth/login', {
         method: 'POST',
         body: req.body
       })
         .then(response => {
-          return { json: response.json(), status: response.status }
+          status = response.status
+          return response.json()
         })
-        .then(data => {
-          if (data.status === 200) {
-            res.status(data.status).json(data.json)
+        .then(json => {
+          if (status === 200) {
+            res.status(status).json(json)
           } else {
-            next(createError(data.status))
+            next(createError(status))
           }
         }).catch(err => {
           next(createError(err))
@@ -33,18 +35,20 @@ export class AuthController {
 
   register (req, res, next) {
     try {
-      fetch('http://auth-service/api/v1/auth/register', {
+      let status
+      fetch('http://auth-service:8888/api/v1/auth/register', {
         method: 'POST',
         body: req.body
       })
         .then(response => {
-          return { json: response.json(), status: response.status }
+          status = response.status
+          return response.json()
         })
-        .then(data => {
-          if (data.status === 201) {
-            res.status(data.status).json(data.json)
+        .then(json => {
+          if (status === 201) {
+            res.status(status).json(json)
           } else {
-            next(createError(data.status))
+            next(createError(status))
           }
         }).catch(err => {
           next(createError(err))

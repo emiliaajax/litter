@@ -10,10 +10,12 @@ import createError from 'http-errors'
 
 import { router as litsRouter } from './lits-router.js'
 import { router as authRouter } from './auth-router.js'
+import { router as userRouter } from './user-router.js'
 
 export const router = express.Router()
 
 router.use('/auth', authRouter)
+router.use('/users', userRouter)
 router.use('/lits', litsRouter)
 
 router.get('/', (req, res) => res.json({

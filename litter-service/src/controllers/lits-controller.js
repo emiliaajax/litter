@@ -10,15 +10,17 @@ import createError from 'http-errors'
 export class LitsController {
   async getLatestLits (req, res, next) {
     try {
-      fetch('http://lits-service/lits/api/v1/lits') // 100 latest lits
+      let status
+      fetch('http://lits:8888/lits/api/v1/lits') // 100 latest lits
         .then(response => {
-          return { json: response.json(), status: response.status }
+          status = response.status
+          return response.json()
         })
-        .then(data => {
-          if (data.status === 200) {
-            res.json(data.json)
+        .then(json => {
+          if (status === 200) {
+            res.json(json)
           } else {
-            next(createError(data.status))
+            next(createError(status))
           }
         }).catch(err => {
           next(createError(err))
@@ -30,15 +32,17 @@ export class LitsController {
 
   getLitById (req, res, next) {
     try {
-      fetch(`http://lits-service/lits/api/v1/lits/${req.params.id}`)
+      let status
+      fetch(`http://lits:8888/lits/api/v1/lits/${req.params.id}`)
         .then(response => {
-          return { json: response.json(), status: response.status }
+          status = response.status 
+          return response.json()
         })
-        .then(data => {
-          if (data.status === 200) {
-            res.json(data.json)
+        .then(json => {
+          if (status === 200) {
+            res.json(json)
           } else {
-            next(createError(data.status))
+            next(createError(status))
           }
         }).catch(err => {
           next(createError(err))
@@ -50,7 +54,8 @@ export class LitsController {
 
   createLit (req, res, next) {
     try {
-      fetch('http://lits-service/lits/api/v1/lits', {
+      let status
+      fetch('http://lits:8888/lits/api/v1/lits', {
         method: 'POST',
         headers: {
           authorization: req.headers.authorization
@@ -58,13 +63,14 @@ export class LitsController {
         body: req.body
       })
         .then(response => {
-          return { json: response.json(), status: response.status }
+          status = response.status
+          return response.json()
         })
-        .then(data => {
-          if (data.status === 201) {
-            res.status(data.status).json(data.json)
+        .then(json => {
+          if (status === 201) {
+            res.status(status).json(json)
           } else {
-            next(createError(data.status))
+            next(createError(status))
           }
         }).catch(err => {
           next(createError(err))
