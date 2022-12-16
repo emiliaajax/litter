@@ -85,46 +85,122 @@
 			"name": "auth-service",
 			"item": [
 				{
-					"name": "Login",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost/litter-service/api/auth/login",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"litter-service",
-								"api",
-								"auth",
-								"login"
-							]
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/litter-service/api/auth/login",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"litter-service",
+										"api",
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/litter-service/api/auth/register",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"litter-service",
+										"api",
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "Register",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost/litter-service/api/auth/register",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"path": [
-								"litter-service",
-								"api",
-								"auth",
-								"register"
-							]
+					"name": "Users",
+					"item": [
+						{
+							"name": "Get all user followings",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/litter-service/api/users/86741841/followings",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"litter-service",
+										"api",
+										"users",
+										"86741841",
+										"followings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create following",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/litter-service/api/users/86741841/followings",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"litter-service",
+										"api",
+										"users",
+										"86741841",
+										"followings"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove following",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "http://localhost/litter-service/api/users/86741841/followings",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"path": [
+										"litter-service",
+										"api",
+										"users",
+										"86741841",
+										"followings"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				}
 			]
 		}
