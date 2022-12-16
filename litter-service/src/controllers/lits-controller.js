@@ -18,7 +18,7 @@ export class LitsController {
         })
         .then(json => {
           if (status === 200) {
-            res.json(json)
+            res.status(status).json(json)
           } else {
             next(createError(status))
           }
@@ -40,7 +40,7 @@ export class LitsController {
         })
         .then(json => {
           if (status === 200) {
-            res.json(json)
+            res.status(status).json(json)
           } else {
             next(createError(status))
           }

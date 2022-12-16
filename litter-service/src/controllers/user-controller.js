@@ -11,19 +11,14 @@ export class UserController {
   getAllUserFollowings (req, res, next) {
     try {
       let status
-      fetch(`http://auth-service:8888/api/v1/users/${req.params.id}/followings`, {
-        method: 'GET',
-        headers: {
-          authorization: req.headers.authorization
-        }
-      })
+      fetch(`http://auth-service:8888/api/v1/users/${req.params.id}/followings`)
         .then(response => {
           status = response.status
           return response.json()
         })
         .then(json => {
           if (status === 200) {
-            res.json(json)
+            res.status(status).json(json)
           } else {
             next(createError(status))
           }
@@ -37,7 +32,26 @@ export class UserController {
 
   createFollowing (req, res, next) {
     try {
-      res.json({ msg: 'createFollowing' })
+      let status
+      fetch(`http://auth-service:8888/api/v1/users/${req.params.id}/followings`, {
+        method: 'POST',
+        headers: {
+          authorization: req.headers.authorization
+        }
+      })
+        .then(response => {
+          status = response.status
+          return response.json()
+        })
+        .then(json => {
+          if (status === 200) {
+            res.status(status).json(json)
+          } else {
+            next(createError(status))
+          }
+        }).catch(err => {
+          next(createError(err))
+        })
     } catch (err) {
       next(createError(err))
     }
