@@ -4,7 +4,7 @@ metadata:
   name: auth-service
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       deployment.name: auth-service
@@ -36,6 +36,11 @@ spec:
             secretKeyRef:
               name: auth-secrets
               key: JWT_PRIVATE_KEY
+        - name: JWT_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: auth-secrets
+              key: JWT_PUBLIC_KEY
         ports:
           - containerPort: 8080
       restartPolicy: Always
