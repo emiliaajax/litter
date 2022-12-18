@@ -58,9 +58,17 @@ deploy-staging:
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD
    # Auth-secrets.
     - kubectl delete secret auth-secrets || true
-    - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY_STAGING
+    - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY_STAGING --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY_STAGING
 
-    - kubectl apply -f ./k8s/litter-service.yaml # We are skipping ingress for now
+    - kubectl apply
+      -f ./k8s/litter-service.yaml
+      -f ./auth-service/k8s/auth-deployment.yaml
+      -f ./auth-service/k8s/auth-service.yaml
+      -f ./auth-service/k8s/mongodb-service.yaml
+      -f ./auth-service/k8s/mongodb-deployment.yaml
+      -f ./auth-service/k8s/mongodb-pvc.yaml
+      -f ./auth-service/k8s/mongodb-pv.yaml
+
     - kubectl rollout restart deployment litter
    # Debugging outputs after completion
     - kubectl get deployments
@@ -88,9 +96,17 @@ deploy:
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD
    # Auth-secrets.
     - kubectl delete secret auth-secrets || true
-    - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY
+    - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY
 
-    - kubectl apply -f ./k8s/litter-service.yaml # We are skipping ingress for now
+    - kubectl apply
+      -f ./k8s/litter-service.yaml
+      -f ./auth-service/k8s/auth-deployment.yaml
+      -f ./auth-service/k8s/auth-service.yaml
+      -f ./auth-service/k8s/mongodb-service.yaml
+      -f ./auth-service/k8s/mongodb-deployment.yaml
+      -f ./auth-service/k8s/mongodb-pvc.yaml
+      -f ./auth-service/k8s/mongodb-pv.yaml
+
     - kubectl rollout restart deployment litter
    # Debugging outputs after completion
     - kubectl get deployments
