@@ -13,7 +13,7 @@ export class AuthController {
       let status
       fetch('http://auth-service:8888/api/v1/auth/login', {
         method: 'POST',
-        body: req.body
+        body: JSON.stringify(req.body)
       })
         .then(response => {
           status = response.status
@@ -35,10 +35,11 @@ export class AuthController {
 
   register (req, res, next) {
     try {
+      console.log(req.body)
       let status
       fetch('http://auth-service:8888/api/v1/auth/register', {
         method: 'POST',
-        body: req.body
+        body: JSON.stringify(req.body)
       })
         .then(response => {
           status = response.status

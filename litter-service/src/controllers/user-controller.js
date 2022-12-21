@@ -37,7 +37,8 @@ export class UserController {
         method: 'POST',
         headers: {
           authorization: req.headers.authorization
-        }
+        },
+        body: JSON.stringify(req.body)
       })
         .then(response => {
           status = response.status
@@ -64,7 +65,8 @@ export class UserController {
         method: 'DELETE',
         headers: {
           authorization: req.headers.authorization
-        }
+        },
+        body: JSON.stringify(req.body)
       })
         .then(response => {
           status = response.status
