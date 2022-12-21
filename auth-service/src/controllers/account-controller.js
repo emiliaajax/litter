@@ -37,6 +37,7 @@ export class AccountController {
    */
   async register (req, res, next) {
     try {
+      console.log(req)
       const user = await new UserModel({
         username: req.body.username,
         email: req.body.email,
@@ -44,6 +45,7 @@ export class AccountController {
       }).save()
       res.status(201).json({ id: user.id })
     } catch (error) {
+      // console.log(error)
       let err = error
       if (err.code === 11000) {
         err = createError(409)
