@@ -26,7 +26,7 @@ try {
   app.use(express.json())
 
   // Registers routes.
-  app.use(`${process.env.BASE_URL}/`, router)
+  app.use(process.env.BASE_URL, router)
 
   // Error handler.
   app.use(function (err, req, res, next) {
