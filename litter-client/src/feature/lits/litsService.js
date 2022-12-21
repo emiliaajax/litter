@@ -15,7 +15,6 @@ const litsAxios = axios.create({
 
 const getHundredLatestLits = async () => {
   const response = await litsAxios(
-    'users',
     { method: 'GET' }
   )
 
