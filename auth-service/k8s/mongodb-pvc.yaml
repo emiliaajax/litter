@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    persistentvolumeclaim.name: mongodb-claim
+  name: mongodb-claim
+spec:
+  volumeName: mongo-volume
+  storageClassName: ""
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi

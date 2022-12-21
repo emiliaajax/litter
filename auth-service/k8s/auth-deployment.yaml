@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-service
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      deployment.name: auth-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        deployment.name: auth-service
+    spec:
+      containers:
+      - name: auth-service
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/auth-service:latest
+        env:
+        - name: DB_CONNECTION_STRING
+          value: "mongodb://mongodb:27017/users"
+        - name: PORT
+          value: "8080"
+        - name: NODE_PORT
+          value: "3000"
+        - name: NODE_ENV
+          value: "production"
+        - name: BASE_URL
+          value: "/"
+        - name: ACCESS_TOKEN_LIFE
+          value: "1h"
+        - name: JWT_PRIVATE_KEY
+          valueFrom:
+            secretKeyRef:
+              name: auth-secrets
+              key: JWT_PRIVATE_KEY
+        - name: JWT_PUBLIC_KEY
+          valueFrom:
+            secretKeyRef:
+              name: auth-secrets
+              key: JWT_PUBLIC_KEY
+        ports:
+          - containerPort: 8080
+      restartPolicy: Always
+      imagePullSecrets:
+      - name: regcred # Secret set as a secret in the cluster
