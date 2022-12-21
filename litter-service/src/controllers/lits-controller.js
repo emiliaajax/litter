@@ -58,7 +58,8 @@ export class LitsController {
       fetch('http://lits:8888/lits/api/v1/lits', {
         method: 'POST',
         headers: {
-          authorization: req.headers.authorization
+          "authorization": req.headers.authorization,
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(req.body)
       })

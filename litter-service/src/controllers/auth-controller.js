@@ -13,6 +13,9 @@ export class AuthController {
       let status
       fetch('http://auth-service:8888/api/v1/auth/login', {
         method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(req.body)
       })
         .then(response => {
@@ -39,6 +42,9 @@ export class AuthController {
       let status
       fetch('http://auth-service:8888/api/v1/auth/register', {
         method: 'POST',
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify(req.body)
       })
         .then(response => {

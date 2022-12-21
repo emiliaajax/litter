@@ -36,7 +36,8 @@ export class UserController {
       fetch(`http://auth-service:8888/api/v1/users/${req.params.id}/followings`, {
         method: 'POST',
         headers: {
-          authorization: req.headers.authorization
+          authorization: req.headers.authorization,
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(req.body)
       })
@@ -64,7 +65,8 @@ export class UserController {
       fetch(`http://auth-service:8888/api/v1/users/${req.params.id}/followings`, {
         method: 'DELETE',
         headers: {
-          authorization: req.headers.authorization
+          authorization: req.headers.authorization,
+          "Content-Type": "application/json"
         },
         body: JSON.stringify(req.body)
       })

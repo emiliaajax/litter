@@ -23,3 +23,4 @@ deploy:
       - ./auth-service/k8s/mongodb-deployment.yaml
       - ./auth-service/k8s/mongodb-pvc.yaml
       - ./auth-service/k8s/mongodb-pv.yaml
+      - ./auth-service/k8s/auth.secret.yaml
