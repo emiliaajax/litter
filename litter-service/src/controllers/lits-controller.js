@@ -60,7 +60,7 @@ export class LitsController {
         headers: {
           authorization: req.headers.authorization
         },
-        body: req.body
+        body: JSON.stringify(req.body)
       })
         .then(response => {
           status = response.status
