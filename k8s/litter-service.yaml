@@ -32,17 +32,19 @@ spec:
     spec:
       containers:
       - name: litter
-        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter:latest
-        imagePullPolicy: Always
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter:latest # Prod
+        # image: litter # Dev
+        imagePullPolicy: Always # Prod
         env:
         - name: PORT
           value: "8080"
         - name: NODE_ENV
-          value: "production"
+          value: "production" # Prod
+          # value: "development"
         - name: NODE_PORT
           value: "3000"
         - name: BASE_URL
-          value: "/"
+          value: "/litter-service"
         ports:
           - containerPort: 8080
       imagePullSecrets:
