@@ -29,7 +29,7 @@ describe('AccountController', () => {
 
     it('should return a 200 status and the access token if the user is authenticated', async () => {
       // Fake user authenticate return value
-      user.authenticate.resolves({ email: 'test@example.com', id: 'fakeId' })
+      user.authenticate.resolves({ email: 'test@example.com', id: 'fakeId', username: 'fakeUsername' })
 
       // Create a spy on the sign method of jwt
       const jwtSignStub = sinon.stub(jwt, 'sign')
@@ -44,7 +44,7 @@ describe('AccountController', () => {
       expect(res.status).to.have.been.calledWith(200)
 
       // Assert that the json method was called with the access token
-      expect(res.json).to.have.been.calledWith({ access_token: 'fake-access-token', id: 'fakeId' })
+      expect(res.json).to.have.been.calledWith({ access_token: 'fake-access-token', id: 'fakeId', username: 'fakeUsername' })
 
       // Restore the jsonwebtoken sign method
       jwtSignStub.restore()
