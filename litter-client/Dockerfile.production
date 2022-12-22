@@ -21,11 +21,8 @@ COPY --chown=node:node . .
 # Set the user
 USER node
 
-# Expose the Node.js port
-EXPOSE ${NODE_PORT}
-
 # Start the web server.
-CMD [ "npm", "run", "build" ]
+RUN npm run build
 
 
 # Stage 2
@@ -37,6 +34,6 @@ RUN rm -rf /usr/share/nginx/html/*
 
 COPY --from=build /usr/src/app/build /usr/share/nginx/html
 
-EXPOSE 8080 3000
+EXPOSE 8080
 
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
