@@ -14,7 +14,7 @@ export class LitsController {
    */
   async loadLits (req, res, next, id) {
     try {
-      const lits = await Lit.find({ authorId: id })
+      const lits = await Lit.find({ authorId: id }).sort({ _id: -1 })
 
       req.lits = lits
 
@@ -33,7 +33,7 @@ export class LitsController {
    */
   async findLatestLits (req, res, next) {
     try {
-      const lits = await Lit.find().limit(100)
+      const lits = await Lit.find().sort({ _id: -1 }).limit(100)
 
       res
         .status(200)
