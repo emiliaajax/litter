@@ -36,11 +36,14 @@ const getAllLitsForLitterBox = async () => {
     lits.push(await getLitsById(id))
   }
 
-  return lits.flat()
+  console.log(new Date(lits.flat()[0].createdAt).getTime() - new Date(lits.flat()[1].createdAt).getTime())
+
+  return lits.flat().sort((a, b) => {
+    return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+  })
 }
 
 const postLit = async (litData) => {
-  console.log(LITS_SERVICE_URL)
   const response = await axios.post(LITS_SERVICE_URL, litData)
 
   return response.data

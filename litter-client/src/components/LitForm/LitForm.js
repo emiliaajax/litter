@@ -7,7 +7,7 @@ function LitForm () {
   const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
-    authorId: 123,
+    authorId: '123',
     text: ''
   })
   const { text } = formData

@@ -2,12 +2,14 @@ import { Card, CardContent, CardHeader, Stack, Typography } from "@mui/material"
 import { Box } from "@mui/system"
 import profileImage from './profile-image.png'
 import Avatar from '@mui/material/Avatar'
+import dateFormat from 'dateformat'
 // import { useDispatch } from "react-redux";
 // import { getUser } from "../../features/userProfiles/userProfilesSlice";
 
 const LitCard = (props) => {
   const lit = props.lit
-  // const dispatch = useDispatch()
+  const date = dateFormat(new Date(lit.createdAt), 'mmmm d, yyyy')
+  const author = 'John Doe'
 
   return (
     <Card 
@@ -21,8 +23,8 @@ const LitCard = (props) => {
               <img src={profileImage} alt='Profile of user' width='35px'></img>
             </Avatar>
           }
-          title={lit.author}
-          subheader={lit.date}
+          title={author}
+          subheader={date}
         />
         <Box
           sx={{ display: 'flex', flexDirection: 'column' }}>
