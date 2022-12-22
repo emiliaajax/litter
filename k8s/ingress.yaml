@@ -8,7 +8,7 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /litter-service
+          - path: /
             pathType: Prefix
             backend:
               service:
