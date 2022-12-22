@@ -6,7 +6,7 @@ const USERS_URL = process.env.REACT_APP_USERS_API
 const usersAxios = axios.create({
   baseURL: USERS_URL,
   headers: {
-    Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).accessToken : ''}`
+    Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).access_token : ''}`
   }
 })
 

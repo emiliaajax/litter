@@ -5,6 +5,7 @@ import Home from './components/Home/Home.js'
 import Login from './components/Login/Login.js'
 import PedigreeChart from './components/PedigreeChart/PedigreeChart.js'
 import RegisterForm from './components/Register/Register.js'
+import ProtectedRoutes from './ProtectedRoutes.js'
 
 function App() {
   return (
@@ -19,21 +20,23 @@ function App() {
             path='/register' 
             element={<RegisterForm />}
           />
-          <Route 
-            path='/' 
-            element={<BaseLayout><Home /></BaseLayout>} 
-            exact={true}
-          />
-          <Route 
-            path='/explore' 
-            element={<BaseLayout><Explore /></BaseLayout>} 
-            exact={true}
-          />
-          <Route 
-            path='/my-profile' 
-            element={<BaseLayout><PedigreeChart /></BaseLayout>} 
-            exact={true}
-          />
+          <Route element={<ProtectedRoutes />}>
+            <Route 
+              path='/' 
+              element={<BaseLayout><Home /></BaseLayout>} 
+              exact={true}
+            />
+            <Route 
+              path='/explore' 
+              element={<BaseLayout><Explore /></BaseLayout>} 
+              exact={true}
+            />
+            <Route 
+              path='/my-profile' 
+              element={<BaseLayout><PedigreeChart /></BaseLayout>} 
+              exact={true}
+            />
+          </Route>
         </Routes>
       </div>
     </Router>

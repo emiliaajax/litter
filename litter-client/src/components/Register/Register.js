@@ -6,21 +6,25 @@ import { register, reset } from '../../feature/auth/authSlice'
 import { Button, FormLabel, InputAdornment, Stack, TextField, Typography } from '@mui/material'
 import EmailIcon from '@mui/icons-material/Email'
 import KeyIcon from '@mui/icons-material/Key'
+import PersonIcon from '@mui/icons-material/Person'
 
 const EMAIL_REGX = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/
-const PASSWORD_REGX = /^.{10,1000}$/
+const PASSWORD_REGX = /^.{10,200}$/
+const USERNAME_REGX = /^.{3,36}$/
 
 const Register = (props) => {
   const [formData, setFormData] = useState({
+    username: '',
     email: '',
     password: '',
     passwordVerification: ''
   })
 
-  const { email, password, passwordVerification } = formData
+  const { username, email, password, passwordVerification } = formData
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const [validUsername, setValidUsername] = useState(false)
   const [validEmail, setValidEmail] = useState(false)
   const [validPassword, setValidPassword] = useState(false)
   const [passwordMatch, setPasswordMatch] = useState(false)
@@ -33,11 +37,15 @@ const Register = (props) => {
     }
 
     if(isSuccess && user) {
-      navigate('/first')
+      navigate('/login')
     }
 
     dispatch(reset())
   }, [user, isError, isSuccess, message, navigate, dispatch])
+
+  useEffect(() => {
+    setValidUsername(USERNAME_REGX.test(username))
+  })
 
   useEffect(() => {
     setValidEmail(EMAIL_REGX.test(email))
@@ -52,12 +60,12 @@ const Register = (props) => {
   }, [password, passwordVerification, passwordMatch])
 
   useEffect(() => {
-    if (validEmail && validPassword && passwordMatch) {
+    if (validEmail && validPassword && passwordMatch && validUsername) {
       setButtonDisabled(false)
     } else {
       setButtonDisabled(true)
     }
-  }, [validEmail, validPassword, passwordMatch])
+  }, [validEmail, validPassword, passwordMatch, validUsername])
 
   const onChange = (event) => {
     setFormData((previousState) => ({
@@ -70,9 +78,10 @@ const Register = (props) => {
     event.preventDefault()
 
     if (password !== passwordVerification) {
-      toast.error('Lösenorden matchar inte')
+      toast.error('Passwords does not match')
     } else {
       const userData = { 
+        username,
         email,
         password
       }
@@ -127,6 +136,26 @@ const Register = (props) => {
               component='h3'>
               Create account
             </FormLabel>
+            <TextField
+              id='username'
+              name='username'
+              type='text' 
+              variant='outlined'
+              label='Username'
+              fullWidth
+              required
+              error={validUsername || username === '' ? false : true}
+              helperText={validUsername || username === '' ? '' : 'Please provide a valid username'}
+              value={username}
+              onChange={onChange}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <PersonIcon />
+                  </InputAdornment>
+                )
+              }}>
+            </TextField>
             <TextField
               id='email'
               name='email'
