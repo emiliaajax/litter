@@ -36,7 +36,7 @@ const getAllLitsForLitterBox = async () => {
     lits.push(await getLitsById(id))
   }
 
-  lits.push(await getLitsById(user))
+  lits.push(await getLitsById(JSON.parse(localStorage.getItem('user')).id))
 
   return lits.flat().sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
