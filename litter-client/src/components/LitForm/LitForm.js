@@ -1,13 +1,12 @@
 import { Button, Grid, TextField } from '@mui/material'
 import { useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { postLit } from '../../feature/lits/litsSlice.js'
 
 function LitForm () {
   const dispatch = useDispatch()
 
   const [formData, setFormData] = useState({
-    authorId: '123',
     text: ''
   })
   const { text } = formData
@@ -29,7 +28,6 @@ function LitForm () {
     dispatch(postLit(formData))
 
     setFormData({
-      authorId: '123',
       text: ''
     })
   }

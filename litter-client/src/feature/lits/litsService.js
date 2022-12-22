@@ -8,9 +8,9 @@ const user = { followings: ['123', '456', '111']}
 
 const litsAxios = axios.create({
   baseURL: LITS_SERVICE_URL,
-  // headers: {
-  //   Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).accessToken : ''}`
-  // }
+  headers: {
+    Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).access_token : ''}`
+  }
 })
 
 const getHundredLatestLits = async () => {
@@ -36,7 +36,7 @@ const getAllLitsForLitterBox = async () => {
     lits.push(await getLitsById(id))
   }
 
-  console.log(new Date(lits.flat()[0].createdAt).getTime() - new Date(lits.flat()[1].createdAt).getTime())
+  lits.push(await getLitsById(user))
 
   return lits.flat().sort((a, b) => {
     return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -44,7 +44,10 @@ const getAllLitsForLitterBox = async () => {
 }
 
 const postLit = async (litData) => {
-  const response = await axios.post(LITS_SERVICE_URL, litData)
+  const response = await litsAxios({
+    method: 'POST',
+    data: litData
+  })
 
   return response.data
 }
