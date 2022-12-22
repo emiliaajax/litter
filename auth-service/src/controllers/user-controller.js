@@ -5,9 +5,18 @@ import UserModel from '../models/user.js'
  * User controller.
  */
 export class UserController {
-  #transform (user) {
+  #transformUserDetailed (user) {
     return {
-      username: user.username
+      username: user.username,
+      email: user.email,
+      id: user.id
+    }
+  }
+
+  #transformUserCompact (user) {
+    return {
+      username: user.username,
+      id: user.id
     }
   }
 
@@ -20,7 +29,7 @@ export class UserController {
    */
   async find (req, res, next) {
     try {
-      const user = this.#transform(await UserModel.findById(req.params.id))
+      const user = this.#transformUserDetailed(await UserModel.findById(req.params.id))
       if (!user) return next(createError(404))
       res.status(200).json({ user })
     } catch (error) {
@@ -44,7 +53,7 @@ export class UserController {
       const limit = 10
       const page = parseInt(req.query.page) || 1
       const skip = (page - 1) * limit
-      const users = (await UserModel.find({}).skip(skip).limit(limit)).map(this.#transform)
+      const users = (await UserModel.find({}).skip(skip).limit(limit)).map(this.#transformUserCompact)
       res.status(200).json({ users })
     } catch (error) {
       next(error)
