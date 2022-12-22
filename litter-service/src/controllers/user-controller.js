@@ -8,6 +8,50 @@
 import createError from 'http-errors'
 
 export class UserController {
+    getAllUsers (req, res, next) {
+    try {
+      let status
+      fetch(`http://auth-service:8888/api/v1/users`)
+        .then(response => {
+          status = response.status
+          return response.json()
+        })
+        .then(json => {
+          if (status === 200) {
+            res.status(status).json(json)
+          } else {
+            next(createError(status))
+          }
+        }).catch(err => {
+          next(createError(err))
+        })
+    } catch (err) {
+      next(createError(err))
+    }
+  }
+
+  getUserById (req, res, next) {
+    try {
+      let status
+      fetch(`http://auth-service:8888/api/v1/users/${req.params.id}`)
+        .then(response => {
+          status = response.status
+          return response.json()
+        })
+        .then(json => {
+          if (status === 200) {
+            res.status(status).json(json)
+          } else {
+            next(createError(status))
+          }
+        }).catch(err => {
+          next(createError(err))
+        })
+    } catch (err) {
+      next(createError(err))
+    }
+  }
+
   getAllUserFollowings (req, res, next) {
     try {
       let status
