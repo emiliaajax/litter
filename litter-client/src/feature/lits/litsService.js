@@ -40,6 +40,7 @@ const getAllLitsForLitterBox = async () => {
 }
 
 const postLit = async (litData) => {
+  console.log(LITS_SERVICE_URL)
   const response = await axios.post(LITS_SERVICE_URL, litData)
 
   return response.data
