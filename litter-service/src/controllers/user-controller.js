@@ -8,10 +8,17 @@
 import createError from 'http-errors'
 
 export class UserController {
-    getAllUsers (req, res, next) {
+  getAllUsers (req, res, next) {
     try {
+      const { page } = req.query
+
+      let url = 'http://auth-service:8888/api/v1/users'
+      if (page) {
+        url += `?page=${page}`
+      }
+
       let status
-      fetch(`http://auth-service:8888/api/v1/users`)
+      fetch(url)
         .then(response => {
           status = response.status
           return response.json()
@@ -81,7 +88,7 @@ export class UserController {
         method: 'POST',
         headers: {
           authorization: req.headers.authorization,
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(req.body)
       })
@@ -110,7 +117,7 @@ export class UserController {
         method: 'DELETE',
         headers: {
           authorization: req.headers.authorization,
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(req.body)
       })
