@@ -32,6 +32,33 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   return await authService.logout()
 })
 
+export const getFollowings = createAsyncThunk('auth/followings', async (thunkAPI) => {
+  try {
+    return await authService.getFollowings()
+  } catch (error) {
+    const message = error.response.data.message || (error.response && error.response.data && error.response.message) || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const follow = createAsyncThunk('auth/follow', async (id, thunkAPI) => {
+  try {
+    return await authService.follow(id)
+  } catch (error) {
+    const message = error.response.data.message || (error.response && error.response.data && error.response.message) || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
+export const unfollow = createAsyncThunk('auth/unfollow', async (id, thunkAPI) => {
+  try {
+    return await authService.unfollow(id)
+  } catch (error) {
+    const message = error.response.data.message || (error.response && error.response.data && error.response.message) || error.message || error.toString()
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -40,7 +67,7 @@ export const authSlice = createSlice({
       state.isError = false
       state.isSuccess = false
       state.message = ''
-      state.updated = false
+      state.isPending = false
     }
   },
   extraReducers: (builder) => {
@@ -66,6 +93,44 @@ export const authSlice = createSlice({
       .addCase(logout.fulfilled, (state) => {
         state.isSuccess = true
         state.user = null
+      })
+      .addCase(getFollowings.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.followings = action.payload
+        state.isPending = false
+      })
+      .addCase(getFollowings.rejected, (state, action) => {
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.payload
+        state.followings = null
+        state.isPending = false
+      })
+      .addCase(getFollowings.pending, (state, action) => {
+        state.isPending = true
+      })
+      .addCase(follow.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isPending = false
+      })
+      .addCase(follow.rejected, (state, action) => {
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.payload
+        state.isPending = false
+      })
+      .addCase(unfollow.fulfilled, (state, action) => {
+        state.isSuccess = true
+        state.isError = false
+        state.isPending = false
+      })
+      .addCase(unfollow.rejected, (state, action) => {
+        state.isError = true
+        state.isSuccess = false
+        state.message = action.payload
+        state.isPending = false
       })
   }
 })

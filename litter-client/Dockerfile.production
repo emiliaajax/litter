@@ -22,6 +22,8 @@ COPY --chown=node:node . .
 USER node
 
 ENV REACT_APP_LITS_API='/lits/api/v1/lits/'
+ENV REACT_APP_USERS_API=''
+ENV REACT_APP_AUTH_API=''
 
 # Start the web server.
 RUN npm run build
