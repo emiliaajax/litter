@@ -14,7 +14,7 @@ export class AuthController {
       fetch('http://auth-service:8888/api/v1/auth/login', {
         method: 'POST',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(req.body)
       })
@@ -42,7 +42,7 @@ export class AuthController {
       fetch('http://auth-service:8888/api/v1/auth/register', {
         method: 'POST',
         headers: {
-          "Content-Type": "application/json"
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(req.body)
       })
