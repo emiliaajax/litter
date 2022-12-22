@@ -2,6 +2,7 @@ import { Button, Grid, TextField } from '@mui/material'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { postLit } from '../../feature/lits/litsSlice.js'
+import { emojiProvider } from 'emoji-provider'
 
 function LitForm () {
   const dispatch = useDispatch()
@@ -24,6 +25,8 @@ function LitForm () {
 
   const onSubmit = (event) => {
     event.preventDefault()
+
+    formData.text = emojiProvider.replaceEmoticonsWithEmojis(formData.text)
 
     dispatch(postLit(formData))
 

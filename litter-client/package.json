@@ -13,6 +13,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.2.1",
     "dateformat": "^5.0.3",
+    "emoji-provider": "^1.0.6",
     "install": "^0.13.0",
     "npm": "^9.2.0",
     "react": "^18.2.0",

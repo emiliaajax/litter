@@ -3,13 +3,24 @@ import { Box } from "@mui/system"
 import profileImage from './profile-image.png'
 import Avatar from '@mui/material/Avatar'
 import dateFormat from 'dateformat'
-// import { useDispatch } from "react-redux";
-// import { getUser } from "../../features/userProfiles/userProfilesSlice";
+import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getUser } from '../../feature/auth/authSlice'
 
 const LitCard = (props) => {
+  const dispatch = useDispatch()
+
   const lit = props.lit
   const date = dateFormat(new Date(lit.createdAt), 'mmmm d, yyyy')
-  const author = 'John Doe'
+
+  const { member } = useSelector((state) => state.auth)
+  const author = member ? member.username : ''
+
+  useEffect(() => {
+    dispatch(getUser(lit.authorId))
+  }, [lit, dispatch])
+
+  useEffect(() => {}, [member])
 
   return (
     <Card 

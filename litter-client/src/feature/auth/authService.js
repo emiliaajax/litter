@@ -36,6 +36,15 @@ const logout = async () => {
   localStorage.clear()
 }
 
+const getUser = async (id) => {
+  const response = await usersAxios(
+    id,
+    { method: 'GET' }
+  )
+
+  return response.data
+}
+
 const getFollowings = async () => {
   const user = JSON.parse(localStorage.getItem('user'))
 
@@ -75,6 +84,7 @@ const authService = {
   register,
   login,
   logout,
+  getUser,
   getFollowings,
   follow,
   unfollow
