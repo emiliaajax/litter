@@ -45,37 +45,37 @@ spec:
             value: "/lits/api/v1/lits/"
         ports:
           - containerPort: 8080
-        volumeMounts:
-          - name: nginx-config
-            mountPath: /etc/nginx/
-      volumes:
-        - name: nginx-config
-          configMap:
-            name: nginx-config      
+      #   volumeMounts:
+      #     - name: nginx-config
+      #       mountPath: /etc/nginx/
+      # volumes:
+      #   - name: nginx-config
+      #     configMap:
+      #       name: nginx-config      
       imagePullSecrets:
       - name: regcred
 ---
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: nginx-config
-  namespace: default
-data:
-  nginx.conf: |
-    events {
-      worker_connections  1024;  ## Default
-    }
+# apiVersion: v1
+# kind: ConfigMap
+# metadata:
+#   name: nginx-config
+#   namespace: default
+# data:
+#   nginx.conf: |
+#     events {
+#       worker_connections  1024;  ## Default
+#     }
 
-    http {
-      server {
-        listen 8080;
-        listen [::]:8080;
+#     http {
+#       server {
+#         listen 8080;
+#         listen [::]:8080;
 
-        root /usr/share/nginx/html;
-        index index.html;
+#         root /usr/share/nginx/html;
+#         index index.html;
 
-        location / {
-          try_files $uri /index.html;
-        }
-      }
-    }
+#         location / {
+#           try_files $uri /index.html;
+#         }
+#       }
+#     }
