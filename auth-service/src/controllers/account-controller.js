@@ -22,7 +22,7 @@ export class AccountController {
         algorithm: 'RS256',
         expiresIn: process.env.ACCESS_TOKEN_LIFE
       })
-      res.status(200).json({ access_token: accessToken })
+      res.status(200).json({ access_token: accessToken, id: user.id })
     } catch (error) {
       next(error.code === 401 ? createError(401) : error)
     }
