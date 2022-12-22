@@ -38,7 +38,6 @@ export class AuthController {
 
   register (req, res, next) {
     try {
-      console.log(req.body)
       let status
       fetch('http://auth-service:8888/api/v1/auth/register', {
         method: 'POST',
