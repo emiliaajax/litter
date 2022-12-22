@@ -65,7 +65,12 @@ export class LitsController {
    */
   async createLit (req, res, next) {
     try {
-      const lit = new Lit(req.body)
+      const data = {
+        authorId: req.user.id,
+        text: req.body.text
+      }
+
+      const lit = new Lit(data)
 
       await lit.save()
 
