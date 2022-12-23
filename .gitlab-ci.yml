@@ -83,6 +83,8 @@ deploy-staging:
       -f ./auth-service/k8s/mongodb-deployment.yaml
       -f ./auth-service/k8s/mongodb-pvc.yaml
       -f ./auth-service/k8s/mongodb-pv.yaml
+      -f ./k8s/lits-service.yaml
+      -f ./k8s/mongodb-lits.yaml
 
     - kubectl rollout restart deployment litter
     - kubectl rollout restart deployment auth-service
@@ -126,6 +128,8 @@ deploy:
       -f ./auth-service/k8s/mongodb-deployment.yaml
       -f ./auth-service/k8s/mongodb-pvc.yaml
       -f ./auth-service/k8s/mongodb-pv.yaml
+      -f ./k8s/lits-service.yaml
+      -f ./k8s/mongodb-lits.yaml
 
     - kubectl rollout restart deployment litter
     - kubectl rollout restart deployment auth-service
