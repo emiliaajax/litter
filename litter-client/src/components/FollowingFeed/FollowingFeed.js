@@ -1,32 +1,23 @@
 import { Avatar, Card, CardHeader, Stack } from "@mui/material"
-// import { useEffect } from "react"
-// import { useDispatch, useSelector } from "react-redux"
-// import { getAllActiveUsers } from "../../features/userProfiles/userProfilesSlice"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { getFollowings } from "../../feature/auth/authSlice.js"
 // import CircularProgress from '@mui/material/CircularProgress';
 
 const FollowingFeed = () => {
+  const dispatch = useDispatch()
 
-  const followings = [
-    {
-      username: 'peterpan'
-    },
-    {
-      username: 'tingeling'
-    },
-    {
-      username: 'captainhook'
-    }
-  ]
+  const { followings } = useSelector((state) => state.auth)
 
-  //   const user = JSON.parse(localStorage.getItem('user'))
+  useEffect(() => {
+    dispatch(getFollowings())
+  }, [])
 
-  //   const dispatch = useDispatch()
+  useEffect(() => {
+    console.log(followings)
+  }, [followings])
 
-  //   const { userProfiles, isPending } = useSelector((state) => state.userProfiles)
 
-  //   useEffect(() => {
-  //     dispatch(getAllActiveUsers())
-  //   }, [dispatch])
 
   return (
     <>
@@ -50,14 +41,9 @@ const FollowingFeed = () => {
               <CardHeader sx={{ border: 'none', padding: '3px', margin: '0px' }}
                 avatar={
                   <Avatar sx={{ bgcolor: 'black', width: '30px', height: '30px' }}>
-                    {following.username[0].toUpperCase()}
+                    {following.username ? following.username[0].toUpperCase() : ''}
                   </Avatar>
                 }
-                //     action={
-                //   <IconButton aria-label="settings">
-                //     <MoreVertIcon />
-                //   </IconButton>
-                // }
                 title={following.username} 
                 />
             </Card>

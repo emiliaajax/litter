@@ -45,7 +45,7 @@ const getUser = async (id) => {
   return response.data
 }
 
-const getFollowings = async () => {
+const getFollowingIds = async () => {
   const user = JSON.parse(localStorage.getItem('user'))
 
   const response = await usersAxios(
@@ -54,6 +54,22 @@ const getFollowings = async () => {
   )
 
   return response.data
+}
+
+const getFollowings = async () => {
+  const ids = await getFollowingIds()
+  const followings = []
+
+  for (const id of ids.followings) {
+    const user = await getUser(id)
+
+    followings.push({ 
+      id,
+      username: user.user.username 
+    })
+  }
+
+  return followings
 }
 
 const follow = async (id) => {
@@ -85,6 +101,7 @@ const authService = {
   login,
   logout,
   getUser,
+  getFollowingIds,
   getFollowings,
   follow,
   unfollow

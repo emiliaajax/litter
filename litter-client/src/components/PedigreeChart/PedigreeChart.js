@@ -1,8 +1,8 @@
 import { Avatar, Button, Card, CardContent, CardHeader, Grid, Stack, Typography } from '@mui/material'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getUser } from '../../feature/auth/authSlice'
+import { follow, getFollowings, getUser, unfollow } from '../../feature/auth/authSlice'
 import LitterBox from '../LitterBox/LitterBox'
 import { getLitsById } from '../../feature/lits/litsSlice'
 
@@ -11,18 +11,39 @@ function PedigreeChart () {
   const { id } = useParams()
 
   const { lits } = useSelector((state) => state.lits)
-  const { user } = useSelector((state) => state.auth)
+  const { user, followings } = useSelector((state) => state.auth)
+
+  const filteredFollowings = followings?.filter((following) => { 
+    return following.id === id 
+  })
 
   const { member } = useSelector((state) => state.auth)
   const username = member ? member.username : ''
+
+  useEffect(() => {
+    dispatch(getFollowings())
+    dispatch(getUser(id))
+  }, [])
 
   useEffect(() => {
     dispatch(getLitsById(id))
   }, [id])
 
   useEffect(() => {
-    dispatch(getUser(id))
-  }, [id])
+    console.log(followings)
+  }, [followings])
+
+  const onFollow = (event) => {
+    event.preventDefault()
+
+    dispatch(follow(id))
+  }
+
+  const onUnfollow = (event) => {
+    event.preventDefault()
+
+    dispatch(unfollow(id))
+  }
 
   return (
     <>
@@ -49,7 +70,10 @@ function PedigreeChart () {
             </Card>
             { user.id === id
               ? ''
-              : <Button>Follow/unfollow</Button>
+              : 
+              filteredFollowings?.length === 0
+              ? <Button onClick={onFollow}>Follow</Button>
+              : <Button onClick={onUnfollow}>Unfollow</Button>
             }
           </Stack>
         </Grid>
