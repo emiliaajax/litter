@@ -15,6 +15,7 @@ const LitCard = (props) => {
 
   const { member } = useSelector((state) => state.auth)
   const author = member ? member.username : ''
+  const authorPageUrl = lit ? `/${lit.authorId}` : ''
 
   useEffect(() => {
     dispatch(getUser(lit.authorId))
@@ -34,7 +35,11 @@ const LitCard = (props) => {
               <img src={profileImage} alt='Profile of user' width='35px'></img>
             </Avatar>
           }
-          title={author}
+          title={
+            <a style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }} href={authorPageUrl}>
+              {author}
+            </a>
+          }
           subheader={date}
         />
         <Box

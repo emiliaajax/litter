@@ -36,7 +36,7 @@ const Register = (props) => {
       toast.error(message)
     }
 
-    if(isSuccess && user) {
+    if(isSuccess) {
       navigate('/login')
     }
 

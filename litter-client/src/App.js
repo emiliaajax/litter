@@ -32,7 +32,7 @@ function App() {
               exact={true}
             />
             <Route 
-              path='/my-profile' 
+              path='/:id' 
               element={<BaseLayout><PedigreeChart /></BaseLayout>} 
               exact={true}
             />
