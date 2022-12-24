@@ -7,11 +7,14 @@ import HomeIcon from '@mui/icons-material/Home'
 import LogoutIcon from '@mui/icons-material/Logout'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import StarIcon from '@mui/icons-material/Star'
+import { useSelector } from 'react-redux'
 // import { useDispatch } from 'react-redux'
 // import { useNavigate } from 'react-router-dom'
 // import { logout, reset } from '../../features/auth/authSlice'
 
 const SideBar = () => {
+  const { user } = useSelector((state) => state.auth)
+  const userUrl = user ? `/${user.id}` : ''
   // const dispatch = useDispatch()
   // const navigate = useNavigate()
   
@@ -49,26 +52,15 @@ const SideBar = () => {
         </ListItemButton>
         <ListItemButton
           component='a'
-          href='/my-profile'>
+          href={userUrl}>
           <ListItemIcon>
             <AccountCircleIcon />
           </ListItemIcon>
           <ListItemText 
-            primary="Pedigree Chart"
+            primary="My Chart"
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
-        {/* <ListItemButton
-          component='a'
-          href='/settings'>
-          <ListItemIcon>
-            <SettingsIcon />
-          </ListItemIcon>
-          <ListItemText 
-            primary="Inställningar"
-            primaryTypographyProps={{ fontSize: '14px' }}
-          />
-        </ListItemButton> */}
         <ListItemButton>
           {/* onClick={onLogout}> */}
           <ListItemIcon>

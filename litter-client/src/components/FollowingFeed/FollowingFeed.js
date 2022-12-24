@@ -2,7 +2,6 @@ import { Avatar, Card, CardHeader, Stack } from "@mui/material"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { getFollowings } from "../../feature/auth/authSlice.js"
-// import CircularProgress from '@mui/material/CircularProgress';
 
 const FollowingFeed = () => {
   const dispatch = useDispatch()
@@ -13,21 +12,10 @@ const FollowingFeed = () => {
     dispatch(getFollowings())
   }, [])
 
-  useEffect(() => {
-    console.log(followings)
-  }, [followings])
-
-
+  useEffect(() => {}, [followings])
 
   return (
     <>
-      {/* {isPending
-      ? <Stack 
-          spacing={1} 
-          sx={{ alignItems: 'center', justifyContent: 'center', width: '70vw', height: '20vh' }}>
-          <CircularProgress />
-        </Stack>
-      :  */}
       <Stack
         id='following'
         spacing={1}
@@ -44,13 +32,16 @@ const FollowingFeed = () => {
                     {following.username ? following.username[0].toUpperCase() : ''}
                   </Avatar>
                 }
-                title={following.username} 
+                title={
+                  <a style={{ textDecoration: 'none', color: 'black' }}href={'/' + following.id}>
+                    {following.username}
+                  </a>
+                } 
                 />
             </Card>
           )
         })}
       </Stack>
-      {/* } */}
     </>
   )
 }

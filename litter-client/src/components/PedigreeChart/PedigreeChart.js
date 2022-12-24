@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { follow, getFollowings, getUser, unfollow } from '../../feature/auth/authSlice'
 import LitterBox from '../LitterBox/LitterBox'
-import { getLitsById } from '../../feature/lits/litsSlice'
+import { getUserLits } from '../../feature/lits/litsSlice'
 
 function PedigreeChart () {
   const dispatch = useDispatch()
@@ -26,11 +26,10 @@ function PedigreeChart () {
   }, [])
 
   useEffect(() => {
-    dispatch(getLitsById(id))
+    dispatch(getUserLits(id))
   }, [id])
 
   useEffect(() => {
-    console.log(followings)
   }, [followings])
 
   const onFollow = (event) => {

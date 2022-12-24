@@ -1,10 +1,11 @@
 import LitterBox from '../LitterBox/LitterBox.js'
 import FollowingFeed from '../FollowingFeed/FollowingFeed.js'
-import { CircularProgress, Grid, Stack } from '@mui/material'
+import { Grid, Stack } from '@mui/material'
 import LitForm from '../LitForm/LitForm.js'
 import { getAllLitsForLitterBox, reset } from '../../feature/lits/litsSlice.js'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { getFollowings } from '../../feature/auth/authSlice.js'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -14,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllLitsForLitterBox())
     dispatch(reset())
-  }, [dispatch, isPosted])
+  }, [isPosted])
 
   return ( 
     <Grid container>

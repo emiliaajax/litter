@@ -36,7 +36,7 @@ const logout = async () => {
   localStorage.clear()
 }
 
-const getUser = async (id) => {
+export const getUser = async (id) => {
   const response = await usersAxios(
     id,
     { method: 'GET' }
@@ -58,6 +58,7 @@ const getFollowingIds = async () => {
 
 const getFollowings = async () => {
   const ids = await getFollowingIds()
+
   const followings = []
 
   for (const id of ids.followings) {
@@ -82,6 +83,8 @@ const follow = async (id) => {
       data: { id }
     }
   )
+
+  return response.data
 }
 
 const unfollow = async (id) => {
@@ -94,6 +97,8 @@ const unfollow = async (id) => {
       data: { id }
     }
   )
+
+  return response.data
 }
 
 const authService = {
@@ -101,7 +106,6 @@ const authService = {
   login,
   logout,
   getUser,
-  getFollowingIds,
   getFollowings,
   follow,
   unfollow
