@@ -28,10 +28,6 @@ const login = async (userCredentials) => {
 
 const logout = async () => {
   const id = JSON.parse(localStorage.getItem('user')).id
-  await axios.post(
-    AUTH_URL + 'logout', 
-    { id }
-  )
   localStorage.removeItem('user')
   localStorage.clear()
 }

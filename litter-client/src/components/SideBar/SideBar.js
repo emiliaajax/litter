@@ -8,22 +8,22 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import StarIcon from '@mui/icons-material/Star'
 import { useSelector } from 'react-redux'
-// import { useDispatch } from 'react-redux'
-// import { useNavigate } from 'react-router-dom'
-// import { logout, reset } from '../../features/auth/authSlice'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { logout, reset } from '../../feature/auth/authSlice'
 
 const SideBar = () => {
   const { user } = useSelector((state) => state.auth)
   const userUrl = user ? `/${user.id}` : ''
-  // const dispatch = useDispatch()
-  // const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   
-  // const onLogout = (event) => {
-  //   event.preventDefault()
-  //   dispatch(logout())
-  //   dispatch(reset())
-  //   navigate('/')
-  // }
+  const onLogout = (event) => {
+    event.preventDefault()
+    dispatch(logout())
+    dispatch(reset())
+    navigate('/')
+  }
 
   return (
     <Box sx={{ width: '100%', paddingTop: '20px', maxWidth: '190px', bgcolor: 'background.paper' }}>
@@ -61,8 +61,8 @@ const SideBar = () => {
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
-        <ListItemButton>
-          {/* onClick={onLogout}> */}
+        <ListItemButton
+          onClick={onLogout}>
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
