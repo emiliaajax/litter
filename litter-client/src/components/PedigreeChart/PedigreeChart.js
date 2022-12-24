@@ -13,12 +13,14 @@ function PedigreeChart () {
   const { lits } = useSelector((state) => state.lits)
   const { user, followings } = useSelector((state) => state.auth)
 
+  const { member } = useSelector((state) => state.auth)
+  const username = member ? member.username : ''
+
   const filteredFollowings = followings?.filter((following) => { 
     return following.id === id 
   })
 
-  const { member } = useSelector((state) => state.auth)
-  const username = member ? member.username : ''
+  const [followed, setFollowed] = useState(filteredFollowings?.length === 0)
 
   useEffect(() => {
     dispatch(getFollowings())
@@ -29,17 +31,21 @@ function PedigreeChart () {
     dispatch(getUserLits(id))
   }, [id])
 
-  useEffect(() => {
-  }, [followings])
+  useEffect(() => {}, [followings, followed])
 
   const onFollow = (event) => {
     event.preventDefault()
+
+    setFollowed(true)
 
     dispatch(follow(id))
   }
 
   const onUnfollow = (event) => {
+    console.log('hej')
     event.preventDefault()
+
+    setFollowed(false)
 
     dispatch(unfollow(id))
   }
@@ -70,7 +76,7 @@ function PedigreeChart () {
             { user.id === id
               ? ''
               : 
-              filteredFollowings?.length === 0
+              !followed
               ? <Button onClick={onFollow}>Follow</Button>
               : <Button onClick={onUnfollow}>Unfollow</Button>
             }
