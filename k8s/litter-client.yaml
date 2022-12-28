@@ -43,6 +43,10 @@ spec:
             value: "production"
           - name: REACT_APP_LITS_API
             value: "/lits/api/v1/lits/"
+          - name: REACT_APP_USERS_API
+            value: "http://localhost:9000/api/v1/users/"
+          - name: REACT_APP_AUTH_API
+            value: "http://localhost:9000/api/v1/auth/"
         ports:
           - containerPort: 8080
       #   volumeMounts:
