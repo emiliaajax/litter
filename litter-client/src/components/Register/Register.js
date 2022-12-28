@@ -32,11 +32,11 @@ const Register = (props) => {
   const { user, isError, isSuccess, message } = useSelector((state) => state.auth)
 
   useEffect(() => {
-    if(isError) {
+    if (isError) {
       toast.error(message)
     }
 
-    if(isSuccess) {
+    if (isSuccess) {
       navigate('/login')
     }
 
@@ -45,7 +45,7 @@ const Register = (props) => {
 
   useEffect(() => {
     setValidUsername(USERNAME_REGX.test(username))
-  })
+  }, [username])
 
   useEffect(() => {
     setValidEmail(EMAIL_REGX.test(email))
@@ -73,25 +73,24 @@ const Register = (props) => {
       [event.target.name]: event.target.value
     }))
   }
-  
+
   const onSubmit = (event) => {
     event.preventDefault()
 
     if (password !== passwordVerification) {
       toast.error('Passwords does not match')
     } else {
-      const userData = { 
+      const userData = {
         username,
         email,
         password
       }
 
       dispatch(register(userData))
-
     }
   }
 
-  return ( 
+  return (
     <div className='register'>
       <Stack
         height='100%'
@@ -99,129 +98,134 @@ const Register = (props) => {
         direction='row'
         spacing={2}
         justifyContent='center'
-        alignItems='center'>
+        alignItems='center'
+      >
 
-      <Stack
-        className='companyName'
-        margin-left='0'
-        height='100%'
-        width='50%'
-        spacing={2}
-        justifyContent='center'
-        textAlign='center'>
-          <Typography 
-            variant='h2' 
+        <Stack
+          className='companyName'
+          margin-left='0'
+          height='100%'
+          width='50%'
+          spacing={2}
+          justifyContent='center'
+          textAlign='center'
+        >
+          <Typography
+            variant='h2'
             component='h1'
             color='black'
-            fontWeight='500'>
-              litter
+            fontWeight='500'
+          >
+            litter
           </Typography>
-          {/* <Typography 
-            variant='h5' 
+          {/* <Typography
+            variant='h5'
             component='h2'
             color='black'>
               The only one you need
           </Typography> */}
         </Stack>
 
-
-        <form className="registerForm" onSubmit={onSubmit}>
+        <form className='registerForm' onSubmit={onSubmit}>
           <Stack
             spacing={3}
             width='30vw'
             justifyContent='center'
-            alignItems='center'>
+            alignItems='center'
+          >
             <FormLabel
               variant='h6'
-              component='h3'>
+              component='h3'
+            >
               Create account
             </FormLabel>
             <TextField
               id='username'
               name='username'
-              type='text' 
+              type='text'
               variant='outlined'
               label='Username'
               fullWidth
               required
-              error={validUsername || username === '' ? false : true}
+              error={!(validUsername || username === '')}
               helperText={validUsername || username === '' ? '' : 'Please provide a valid username'}
               value={username}
               onChange={onChange}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment position='start'>
                     <PersonIcon />
                   </InputAdornment>
                 )
-              }}>
-            </TextField>
+              }}
+            />
             <TextField
               id='email'
               name='email'
-              type='email' 
+              type='email'
               variant='outlined'
               label='E-mail'
               fullWidth
               required
-              error={validEmail || email === '' ? false : true}
+              error={!(validEmail || email === '')}
               helperText={validEmail || email === '' ? '' : 'Please provide a valid email'}
               value={email}
               onChange={onChange}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment position='start'>
                     <EmailIcon />
                   </InputAdornment>
                 )
-              }}>
-            </TextField>
+              }}
+            />
             <TextField
               id='password'
               name='password'
-              type='password' 
+              type='password'
               variant='outlined'
               label='Password'
               fullWidth
               required
-              error={validPassword || password === '' ? false : true}
+              error={!(validPassword || password === '')}
               helperText={validPassword || password === '' ? '' : 'The password must be of at least 10 characters'}
               value={password}
               onChange={onChange}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment position='start'>
                     <KeyIcon />
                   </InputAdornment>
                 )
-              }}>
-            </TextField>
+              }}
+            />
             <TextField
               id='passwordVerification'
               name='passwordVerification'
-              type='password' 
+              type='password'
               variant='outlined'
               label='Confirm password'
               fullWidth
               required
-              error={passwordMatch || passwordVerification === '' ? false : true}
+              error={!(passwordMatch || passwordVerification === '')}
               helperText={passwordMatch || passwordVerification === '' ? '' : 'The passwords does not match'}
               value={passwordVerification}
               onChange={onChange}
               InputProps={{
                 startAdornment: (
-                  <InputAdornment position="start">
+                  <InputAdornment position='start'>
                     <KeyIcon />
                   </InputAdornment>
                 )
-              }}>
-            </TextField>
-            <Button 
+              }}
+            />
+            <Button
               type='submit'
-              variant="contained"
-              component="button"
-              disabled={buttonDisabled ? true : false}>
-                Register
+              variant='contained'
+              component='button'
+              disabled={!!buttonDisabled}
+            >
+              Register
             </Button>
           </Stack>
         </form>

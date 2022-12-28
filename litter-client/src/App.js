@@ -7,34 +7,34 @@ import PedigreeChart from './components/PedigreeChart/PedigreeChart.js'
 import RegisterForm from './components/Register/Register.js'
 import ProtectedRoutes from './ProtectedRoutes.js'
 
-function App() {
+function App () {
   return (
     <Router>
-      <div className="App" style={{ margin: '0 auto', maxWidth: '1200px' }}>
+      <div className='App' style={{ margin: '0 auto', maxWidth: '1200px' }}>
         <Routes>
-          <Route 
-            path='/login' 
+          <Route
+            path='/login'
             element={<Login />}
           />
-          <Route 
-            path='/register' 
+          <Route
+            path='/register'
             element={<RegisterForm />}
           />
           <Route element={<ProtectedRoutes />}>
-            <Route 
-              path='/' 
-              element={<BaseLayout><Home /></BaseLayout>} 
-              exact={true}
+            <Route
+              path='/'
+              element={<BaseLayout><Home /></BaseLayout>}
+              exact
             />
-            <Route 
-              path='/explore' 
-              element={<BaseLayout><Explore /></BaseLayout>} 
-              exact={true}
+            <Route
+              path='/explore'
+              element={<BaseLayout><Explore /></BaseLayout>}
+              exact
             />
-            <Route 
-              path='/:id' 
-              element={<BaseLayout><PedigreeChart /></BaseLayout>} 
-              exact={true}
+            <Route
+              path='/:id'
+              element={<BaseLayout><PedigreeChart /></BaseLayout>}
+              exact
             />
           </Route>
         </Routes>

@@ -1,6 +1,6 @@
 import { Button, Grid, TextField } from '@mui/material'
 import { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { postLit } from '../../feature/lits/litsSlice.js'
 import { emojiProvider } from 'emoji-provider'
 
@@ -36,9 +36,10 @@ function LitForm () {
   }
 
   return (
-    <form 
-      onSubmit={onSubmit} 
-      style={{ paddingTop: '30px', paddingBottom: '30px', width: '70%', margin: '0 auto', paddingLeft: '30px' }}>
+    <form
+      onSubmit={onSubmit}
+      style={{ paddingTop: '30px', paddingBottom: '30px', width: '70%', margin: '0 auto', paddingLeft: '30px' }}
+    >
       <Grid container spacing={2}>
         <Grid item xs={11}>
           <TextField
@@ -57,7 +58,8 @@ function LitForm () {
           <Button
             type='submit'
             size='small'
-            sx={{ height: '30px', color: 'black', backgroundColor: 'orange', borderRadius: '30px', marginTop: '5px'}}>
+            sx={{ height: '30px', color: 'black', backgroundColor: 'orange', borderRadius: '30px', marginTop: '5px' }}
+          >
             Lit
           </Button>
         </Grid>

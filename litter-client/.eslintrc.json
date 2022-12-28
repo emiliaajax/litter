@@ -1,0 +1,20 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "parser": "@babel/eslint-parser",
+    "extends": ["standard", "standard-jsx", "standard-react"],
+    "parserOptions": {
+        "requireConfigFile": false,
+        "babelOptions": {
+            "parserOpts": {
+              "plugins": ["jsx"]
+            }
+        }
+    },
+    "rules": {
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": "off"
+    }
+}

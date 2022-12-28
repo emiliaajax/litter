@@ -21,17 +21,17 @@ function PedigreeChart () {
   useEffect(() => {
     dispatch(getFollowings())
     dispatch(getUser(id))
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     dispatch(getUserLits(id))
-  }, [id])
+  }, [id]) // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {}, [followed])
 
   useEffect(() => {
-    const filteredFollowings = followings?.filter((following) => { 
-      return following.id === id 
+    const filteredFollowings = followings?.filter((following) => {
+      return following.id === id
     })
 
     if (filteredFollowings?.length === 0) {
@@ -39,7 +39,7 @@ function PedigreeChart () {
     } else {
       setFollowed(true)
     }
-  }, [followings])
+  }, [followings]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const onFollow = (event) => {
     event.preventDefault()
@@ -61,18 +61,20 @@ function PedigreeChart () {
     <>
       <Grid container>
         <Grid item xs={9}>
-          <LitterBox lits={lits}/>
+          <LitterBox lits={lits} />
         </Grid>
         <Grid item xs={3}>
           <Stack>
             <Card
               variant='outlined'
-              key={Math.random() * 100000} 
-              sx={{ border: 'none', padding: '0px', margin: '0px', paddingTop: '10px', paddingLeft: '15px' }}>
-              <CardHeader sx={{ border: 'none', margin: '0px', marginLeft: '20px' }}
+              key={Math.random() * 100000}
+              sx={{ border: 'none', padding: '0px', margin: '0px', paddingTop: '10px', paddingLeft: '15px' }}
+            >
+              <CardHeader
+                sx={{ border: 'none', margin: '0px', marginLeft: '20px' }}
                 avatar={
                   <Avatar sx={{ bgcolor: 'black', width: '200px', height: '200px', borderRadius: '0px' }}>
-                    {username? username[0].toUpperCase() : ''}
+                    {username ? username[0].toUpperCase() : ''}
                   </Avatar>
                 }
               />
@@ -80,13 +82,11 @@ function PedigreeChart () {
                 <Typography>{username}</Typography>
               </CardContent>
             </Card>
-            { user.id === id
+            {user.id === id
               ? ''
-              : 
-              !followed
-              ? <Button onClick={onFollow}>Follow</Button>
-              : <Button onClick={onUnfollow}>Unfollow</Button>
-            }
+              : !followed
+                  ? <Button onClick={onFollow}>Follow</Button>
+                  : <Button onClick={onUnfollow}>Unfollow</Button>}
           </Stack>
         </Grid>
       </Grid>

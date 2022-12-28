@@ -12,23 +12,23 @@ const LitterBox = (props) => {
   return (
     <>
       {isPending
-      ? <Stack 
-          spacing={1} 
-          sx={{ alignItems: 'center', justifyContent: 'center' }}>
+        ? <Stack
+            spacing={1}
+            sx={{ alignItems: 'center', justifyContent: 'center' }}
+          >
           <CircularProgress sx={{ color: 'orange' }} />
-        </Stack>
-      :
-      <Stack
-        id='lits'
-        spacing={1}
-        sx={{ paddingTop: '5px', maxWidth: '70%', margin: '0 auto' }}>
-        {lits?.map((lit) => {
-          return (
-            <LitCard key={Math.random() * 100000} lit={lit} />
-          )
-        })}
-      </Stack>
-      }
+        </Stack> // eslint-disable-line react/jsx-closing-tag-location
+        : <Stack
+            id='lits'
+            spacing={1}
+            sx={{ paddingTop: '5px', maxWidth: '70%', margin: '0 auto' }}
+          >
+          {lits?.map((lit) => {
+            return (
+              <LitCard key={Math.random() * 100000} lit={lit} />
+            )
+          })}
+        </Stack> /* eslint-disable-line react/jsx-closing-tag-location */}
     </>
   )
 }

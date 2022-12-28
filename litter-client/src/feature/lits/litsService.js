@@ -30,7 +30,10 @@ const getUserLits = async (id) => {
   const lits = await getLitsById(id)
   const user = await authService.getUser(id)
 
-  lits.map((lit) => lit.author = user.user.username)
+  lits.map((lit) => {
+    lit.author = user.user.username
+    return lit
+  })
 
   return lits
 }
@@ -52,15 +55,21 @@ const getAllLitsForLitterBox = async () => {
     const author = await authService.getUser(following.id)
     const litsFromFollowedUser = await getLitsById(following.id)
 
-    litsFromFollowedUser.map((lit) => lit.author = author.user.username)
-    
+    litsFromFollowedUser.map((lit) => {
+      lit.author = author.user.username
+      return lit
+    })
+
     lits.push(litsFromFollowedUser)
   }
 
   const myLits = await getLitsById(JSON.parse(localStorage.getItem('user')).id)
   const myUser = await authService.getUser(JSON.parse(localStorage.getItem('user')).id)
 
-  myLits.map((lit) => lit.author = myUser.user.username)
+  myLits.map((lit) => {
+    lit.author = myUser.user.username
+    return lit
+  })
 
   lits.push(myLits)
 

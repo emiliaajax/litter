@@ -7,8 +7,7 @@ import HomeIcon from '@mui/icons-material/Home'
 import LogoutIcon from '@mui/icons-material/Logout'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import StarIcon from '@mui/icons-material/Star'
-import { useSelector } from 'react-redux'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout, reset } from '../../feature/auth/authSlice'
 
@@ -17,7 +16,7 @@ const SideBar = () => {
   const userUrl = user ? `/${user.id}` : ''
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  
+
   const onLogout = (event) => {
     event.preventDefault()
     dispatch(logout())
@@ -27,47 +26,51 @@ const SideBar = () => {
 
   return (
     <Box sx={{ width: '100%', paddingTop: '20px', maxWidth: '190px', bgcolor: 'background.paper' }}>
-      <List component="nav">
+      <List component='nav'>
         <ListItemButton
           component='a'
-          href='/'>          
+          href='/'
+        >
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText 
-            primary="Litter Box"
+          <ListItemText
+            primary='Litter Box'
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
         <ListItemButton
           component='a'
-          href='/explore'>
+          href='/explore'
+        >
           <ListItemIcon>
             <StarIcon />
           </ListItemIcon>
-          <ListItemText 
-            primary="Explore"
+          <ListItemText
+            primary='Explore'
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
         <ListItemButton
           component='a'
-          href={userUrl}>
+          href={userUrl}
+        >
           <ListItemIcon>
             <AccountCircleIcon />
           </ListItemIcon>
-          <ListItemText 
-            primary="My Chart"
+          <ListItemText
+            primary='My Chart'
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>
         <ListItemButton
-          onClick={onLogout}>
+          onClick={onLogout}
+        >
           <ListItemIcon>
             <LogoutIcon />
           </ListItemIcon>
-          <ListItemText 
-            primary="Log out"
+          <ListItemText
+            primary='Log out'
             primaryTypographyProps={{ fontSize: '14px' }}
           />
         </ListItemButton>

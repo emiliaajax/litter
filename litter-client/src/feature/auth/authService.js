@@ -27,7 +27,6 @@ const login = async (userCredentials) => {
 }
 
 const logout = async () => {
-  const id = JSON.parse(localStorage.getItem('user')).id
   localStorage.removeItem('user')
   localStorage.clear()
 }
@@ -60,9 +59,9 @@ const getFollowings = async () => {
   for (const id of ids.followings) {
     const user = await getUser(id)
 
-    followings.push({ 
+    followings.push({
       id,
-      username: user.user.username 
+      username: user.user.username
     })
   }
 
@@ -74,8 +73,8 @@ const follow = async (id) => {
 
   const response = await usersAxios(
     `${user.id}/followings`,
-    { 
-      method: 'POST', 
+    {
+      method: 'POST',
       data: { id }
     }
   )
@@ -88,8 +87,8 @@ const unfollow = async (id) => {
 
   const response = await usersAxios(
     `${user.id}/followings`,
-    { 
-      method: 'DELETE', 
+    {
+      method: 'DELETE',
       data: { id }
     }
   )

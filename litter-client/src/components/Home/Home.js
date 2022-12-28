@@ -5,24 +5,23 @@ import LitForm from '../LitForm/LitForm.js'
 import { getAllLitsForLitterBox, reset } from '../../feature/lits/litsSlice.js'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getFollowings } from '../../feature/auth/authSlice.js'
 
 const Home = () => {
   const dispatch = useDispatch()
 
-  const { lits, isPosted } = useSelector((state) => state.lits) 
+  const { lits, isPosted } = useSelector((state) => state.lits)
 
   useEffect(() => {
     dispatch(getAllLitsForLitterBox())
     dispatch(reset())
-  }, [isPosted])
+  }, [isPosted]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  return ( 
+  return (
     <Grid container>
       <Grid item xs={9} sx={{ borderRight: '1px solid #dcdcdc' }}>
         <Stack>
           <LitForm />
-          <LitterBox lits={lits}/>
+          <LitterBox lits={lits} />
         </Stack>
       </Grid>
       <Grid item xs={3}>

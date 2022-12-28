@@ -1,10 +1,10 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import authService from "./authService";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import authService from './authService'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
 export const initialState = {
-  user: user ? user : null,
+  user: user || null,
   isError: false,
   isSuccess: false,
   message: ''
@@ -48,7 +48,7 @@ export const getFollowings = createAsyncThunk('auth/followings', async (thunkAPI
     const message = error.response.data.message || (error.response && error.response.data && error.response.message) || error.message || error.toString()
     return thunkAPI.rejectWithValue(message)
   }
-}) 
+})
 
 export const follow = createAsyncThunk('auth/follow', async (id, thunkAPI) => {
   try {
