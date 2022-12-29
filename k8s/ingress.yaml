@@ -3,6 +3,7 @@ kind: Ingress
 metadata:
   name: ingress
   annotations:
+    kubernetes.io/ingress.class: nginx
 spec:
   rules:
     - host: localhost
@@ -12,6 +13,13 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: litter
+                name: client
+                port:
+                  number: 8888
+          - path: /lits
+            pathType: Prefix
+            backend:
+              service:
+                name: lits
                 port:
                   number: 8888

@@ -1,5 +1,5 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux,visualstudiocode,node
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux,visualstudiocode,node
+# Created by https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,macos,linux
+# Edit at https://www.toptal.com/developers/gitignore?templates=node,visualstudiocode,windows,macos,linux
 
 ### Linux ###
 *~
@@ -44,10 +44,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-### macOS Patch ###
-# iCloud generated files
-*.icloud
 
 ### Node ###
 # Logs
@@ -208,6 +204,8 @@ dist
 .history
 .ionide
 
+# Support for Project snippet scope
+
 ### Windows ###
 # Windows thumbnail cache files
 Thumbs.db
@@ -234,4 +232,6 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,visualstudiocode,node
+.kpt-pipeline
+
+# End of https://www.toptal.com/developers/gitignore/api/node,visualstudiocode,windows,macos,linux
