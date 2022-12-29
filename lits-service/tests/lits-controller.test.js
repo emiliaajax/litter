@@ -15,7 +15,7 @@ describe('LitsController', () => {
   describe('findLatestLits', () => {
     let req, res, next
 
-    it('Should send a JSON response with all of the latest lits (3 lits).', async function () {
+    it('Should send a JSON response with all of the latest lits (2 lits).', async function () {
       // Create mock lits
       const fakeData = [
         {
