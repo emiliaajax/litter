@@ -60,7 +60,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/db"
+    path: "/data/db/lits"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
