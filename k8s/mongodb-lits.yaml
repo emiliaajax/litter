@@ -39,7 +39,7 @@ spec:
             - containerPort: 27017
           resources: {}
           volumeMounts:
-            - mountPath: /data/db
+            - mountPath: /data/lits
               name: mongodb-lits-claim
       restartPolicy: Always
       volumes:
@@ -60,7 +60,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/data/db"
+    path: "/data/lits"
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
