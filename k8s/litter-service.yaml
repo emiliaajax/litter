@@ -44,7 +44,7 @@ spec:
         - name: NODE_PORT
           value: "3000"
         - name: BASE_URL
-          value: "/"
+          value: "/litter/"
         ports:
           - containerPort: 8080
       imagePullSecrets:
