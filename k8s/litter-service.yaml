@@ -5,7 +5,7 @@ metadata:
     service.name: litter
   name: litter
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
     - name: "litter-port"
       port: 8888
