@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: lits
-        image: lits
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/lits-service
         env:
         - name: DB_CONNECTION_STRING
           value: "mongodb://mongodb-lits:27017/lits"
