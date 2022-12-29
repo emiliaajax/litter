@@ -33,7 +33,7 @@ spec:
       containers:
       - name: client
         image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter-client-staging:latest
-        imagePullPolicy: Never
+        imagePullPolicy: Always
         env:
           - name: PORT
             value: "8080"
