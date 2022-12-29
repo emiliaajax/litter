@@ -56,13 +56,13 @@ build-staging:
       --dockerfile "${CI_PROJECT_DIR}/litter-client/Dockerfile.staging"
       --destination "${CI_REGISTRY_IMAGE}/litter-client-staging:${CI_COMMIT_TAG:-latest}"
 
-lint-test-litter-client:
-  stage: test
-  image: node:18-alpine
-  script:
-    - cd litter-client
-    - npm install
-    - npm run lint
+# lint-test-litter-client:
+#   stage: test
+#   image: node:18-alpine
+#   script:
+#     - cd litter-client
+#     - npm install
+#     - npm run lint
 
 unit-test-auth-service:
   stage: test
