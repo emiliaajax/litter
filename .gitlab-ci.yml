@@ -21,6 +21,10 @@ build:
       --context "${CI_PROJECT_DIR}/auth-service"  
       --dockerfile "${CI_PROJECT_DIR}/auth-service/Dockerfile.production"
       --destination "${CI_REGISTRY_IMAGE}/auth-service:${CI_COMMIT_TAG:-latest}"
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/lits-service"  
+      --dockerfile "${CI_PROJECT_DIR}/lits-service/Dockerfile.production"
+      --destination "${CI_REGISTRY_IMAGE}/lits-service:${CI_COMMIT_TAG:-latest}"
 
 unit-test-auth-service:
   stage: test
@@ -35,6 +39,22 @@ lint-test-auth-service:
   image: node:18-alpine
   script:
     - cd auth-service
+    - npm install
+    - npm run lint
+
+unit-test-lits-service:
+  stage: test
+  image: node:18-alpine
+  script:
+    - cd lits-service
+    - npm install
+    - npm run test
+
+lint-test-lits-service:
+  stage: test
+  image: node:18-alpine
+  script:
+    - cd lits-service
     - npm install
     - npm run lint
 
@@ -59,6 +79,9 @@ deploy-staging:
    # Auth-secrets.
     - kubectl delete secret auth-secrets || true
     - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY_STAGING --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY_STAGING
+    # Lits-secrets
+    - kubectl delete secret lits-secrets || true
+    - kubectl create secret generic lits-secrets --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY_STAGING
 
     - kubectl apply
       -f ./k8s/litter-service.yaml
@@ -68,9 +91,12 @@ deploy-staging:
       -f ./auth-service/k8s/mongodb-deployment.yaml
       -f ./auth-service/k8s/mongodb-pvc.yaml
       -f ./auth-service/k8s/mongodb-pv.yaml
+      -f ./k8s/lits-service.yaml
+      -f ./k8s/mongodb-lits.yaml
 
     - kubectl rollout restart deployment litter
     - kubectl rollout restart deployment auth-service
+    - kubectl rollout restart deployment lits
    # Debugging outputs after completion
     - kubectl get deployments
     - kubectl get pods
@@ -98,6 +124,9 @@ deploy:
    # Auth-secrets.
     - kubectl delete secret auth-secrets || true
     - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY
+   # Lits-secrets
+    - kubectl delete secret lits-secrets || true
+    - kubectl create secret generic lits-secrets --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY
 
     - kubectl apply
       -f ./k8s/litter-service.yaml
@@ -107,9 +136,12 @@ deploy:
       -f ./auth-service/k8s/mongodb-deployment.yaml
       -f ./auth-service/k8s/mongodb-pvc.yaml
       -f ./auth-service/k8s/mongodb-pv.yaml
+      -f ./k8s/lits-service.yaml
+      -f ./k8s/mongodb-lits.yaml
 
     - kubectl rollout restart deployment litter
     - kubectl rollout restart deployment auth-service
+    - kubectl rollout restart deployment lits
    # Debugging outputs after completion
     - kubectl get deployments
     - kubectl get pods

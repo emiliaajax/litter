@@ -12,6 +12,10 @@ build:
     context: auth-service
     docker:
       dockerfile: Dockerfile.production
+  - image: lits
+    context: lits-service
+    docker:
+      dockerfile: Dockerfile.production
 deploy:
   kubectl:
     manifests:
@@ -24,3 +28,5 @@ deploy:
       - ./auth-service/k8s/mongodb-pvc.yaml
       - ./auth-service/k8s/mongodb-pv.yaml
       - ./auth-service/k8s/auth.secret.yaml
+      - ./k8s/lits-service.yaml
+      - ./k8s/mongodb-lits.yaml
