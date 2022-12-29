@@ -96,7 +96,7 @@ deploy-staging:
 
     - kubectl rollout restart deployment litter
     - kubectl rollout restart deployment auth-service
-    - kubectl rollout restart deployment lits-service
+    - kubectl rollout restart deployment lits
    # Debugging outputs after completion
     - kubectl get deployments
     - kubectl get pods
@@ -141,7 +141,7 @@ deploy:
 
     - kubectl rollout restart deployment litter
     - kubectl rollout restart deployment auth-service
-    - kubectl rollout restart deployment lits-service
+    - kubectl rollout restart deployment lits
    # Debugging outputs after completion
     - kubectl get deployments
     - kubectl get pods
