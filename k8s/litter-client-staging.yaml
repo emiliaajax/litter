@@ -32,7 +32,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter-client:latest
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter-client-staging:latest
         imagePullPolicy: Never
         env:
           - name: PORT
@@ -40,7 +40,7 @@ spec:
           - name: NODE_PORT
             value: "3000"
           - name: NODE_ENV
-            value: "production"
+            value: "staging"
         ports:
           - containerPort: 8080
       #   volumeMounts:

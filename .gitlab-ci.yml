@@ -4,7 +4,7 @@ stages:
   - integration-test
   - deploy
 
-build:
+build-production:
   stage: build
   only:
     - merge_requests
@@ -21,6 +21,24 @@ build:
       --context "${CI_PROJECT_DIR}/litter-client"  
       --dockerfile "${CI_PROJECT_DIR}/litter-client/Dockerfile.production"
       --destination "${CI_REGISTRY_IMAGE}/litter-client:${CI_COMMIT_TAG:-latest}"
+
+build-staging:
+  stage: build
+  only:
+    - merge_requests
+    - main
+  image:
+    name: gcr.io/kaniko-project/executor:v1.9.0-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/litter-service"  
+      --dockerfile "${CI_PROJECT_DIR}/litter-service/Dockerfile.production"
+      --destination "${CI_REGISTRY_IMAGE}/litter:${CI_COMMIT_TAG:-latest}"
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/litter-client"  
+      --dockerfile "${CI_PROJECT_DIR}/litter-client/Dockerfile.staging"
+      --destination "${CI_REGISTRY_IMAGE}/litter-client-staging:${CI_COMMIT_TAG:-latest}"
 
 lint-test-litter-client:
   stage: test
@@ -51,8 +69,8 @@ deploy-staging:
 
     - kubectl apply 
       -f ./k8s/litter-service.yaml
-      -f ./k8s/litter-client.yaml
-  
+      -f ./k8s/litter-client-staging.yaml
+
     - kubectl rollout restart deployment litter
     - kubectl rollout restart deployment litter-client
    # Debugging outputs after completion
