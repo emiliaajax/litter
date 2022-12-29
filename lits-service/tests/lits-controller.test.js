@@ -4,8 +4,6 @@
 import chai from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import { MongoMemoryServer } from 'mongodb-memory-server'
-import mongoose from 'mongoose'
 
 import { LitsController } from '../src/controllers/api/lits-controller.js'
 import { Lit } from '../src/models/lit.js'
@@ -15,50 +13,31 @@ const expect = chai.expect
 
 describe('LitsController', () => {
   describe('findLatestLits', () => {
-    let mongo
     let req, res, next
 
-    before(async function () {
-      // More than default timeout (2s) is required to start server
-      this.timeout(20000) // 20s
-
-      // Create MongoDB mock server
-      mongo = await MongoMemoryServer.create()
-      const uri = mongo.getUri()
-
-      // Disable deprecation warning
-      mongoose.set('strictQuery', false)
-
-      await mongoose.connect(uri, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      })
-    })
-
-    after(async () => {
-      await mongoose.disconnect()
-      await mongo.stop()
-    })
-
-    it('Should send a JSON response with all of the latest lits (3 lits).', async () => {
+    it('Should send a JSON response with all of the latest lits (3 lits).', async function () {
       // Create mock lits
-      const lits = [
-        new Lit({
-          authorId: 'fakeId1',
-          text: 'FakeText1'
-        }),
-        new Lit({
-          authorId: 'fakeId2',
-          text: 'FakeText2'
-        }),
-        new Lit({
-          authorId: 'fakeId3',
-          text: 'FakeText3'
-        })
+      const fakeData = [
+        {
+          _id: '5fbbc2e1c7a9a907dbb7e6b5',
+          authorId: '57f72c44f92ece0b9c95545e',
+          text: 'Fake lit text',
+          created_at: '2022-12-29T00:00:00.000Z',
+          updated_at: '2022-12-29T02:59:00.000Z',
+          __v: 0
+        },
+        {
+          _id: '6a7b8c9d0e1f2g3h4i5j6k7',
+          authorId: '5a4d3e2f1c0b9a8d7e6f5g4',
+          text: 'Another fake lit text',
+          created_at: '2022-12-29T02:00:00.000Z',
+          updated_at: '2022-12-29T03:00:00.000Z',
+          __v: 0
+        }
       ]
 
-      // Save lits
-      await Promise.all(lits.map((lit) => lit.save()))
+      const sortStub = sinon.stub().returns({ limit: sinon.stub().resolves(fakeData) })
+      sinon.stub(Lit, 'find').returns({ sort: sortStub })
 
       // Configure req, res, next
       req = {}
@@ -82,8 +61,8 @@ describe('LitsController', () => {
       // Assert that the response is of type array
       expect(res.json).to.have.been.calledWith(sinon.match.array)
 
-      // Assert that the response data includes all lits (or 100 latest)
-      expect(res.json).to.have.been.calledWith(sinon.match(array => array.length === lits.length)) // lits.length = 3
+      // Assert that the response data includes the fake data
+      expect(res.json).to.have.been.calledWith(sinon.match(array => array.length === fakeData.length)) // fakeData.length = 2
     })
   })
 })
