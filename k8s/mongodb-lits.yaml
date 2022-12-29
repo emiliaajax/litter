@@ -39,7 +39,7 @@ spec:
             - containerPort: 27017
           resources: {}
           volumeMounts:
-            - mountPath: /data/db
+            - mountPath: /data/db/lits
               name: mongodb-lits-claim
       restartPolicy: Always
       volumes:
