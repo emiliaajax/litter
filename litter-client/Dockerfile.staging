@@ -21,9 +21,9 @@ COPY --chown=node:node . .
 # Set the user
 USER node
 
-ENV REACT_APP_LITS_API='http://cscloud6-55.lnu.se/api/v1/lits'
-ENV REACT_APP_USERS_API='http://cscloud6-55.lnu.se/api/v1/users'
-ENV REACT_APP_AUTH_API='http://cscloud6-55.lnu.se/api/v1/auth'
+ENV REACT_APP_LITS_API='http://cscloud6-55.lnu.se/litter/api/v1/lits'
+ENV REACT_APP_USERS_API='http://cscloud6-55.lnu.se/litter/api/v1/users'
+ENV REACT_APP_AUTH_API='http://cscloud6-55.lnu.se/litter/api/v1/auth'
 
 # Start the web server.
 RUN npm run build
