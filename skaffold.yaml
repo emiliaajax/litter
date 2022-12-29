@@ -4,12 +4,29 @@ metadata:
   name: litter
 build:
   artifacts:
-  - image: client
-    context: litter-client
+  - image: litter
+    context: litter-service
+    docker:
+      dockerfile: Dockerfile.production
+  - image: auth-service
+    context: auth-service
+    docker:
+      dockerfile: Dockerfile.production
+  - image: lits
+    context: lits-service
     docker:
       dockerfile: Dockerfile.production
 deploy:
   kubectl:
     manifests:
       - ./k8s/ingress.yaml
-      - ./k8s/litter-client.yaml
+      - ./k8s/litter-service.yaml
+      - ./auth-service/k8s/auth-deployment.yaml
+      - ./auth-service/k8s/auth-service.yaml
+      - ./auth-service/k8s/mongodb-service.yaml
+      - ./auth-service/k8s/mongodb-deployment.yaml
+      - ./auth-service/k8s/mongodb-pvc.yaml
+      - ./auth-service/k8s/mongodb-pv.yaml
+      - ./auth-service/k8s/auth.secret.yaml
+      - ./k8s/lits-service.yaml
+      - ./k8s/mongodb-lits.yaml

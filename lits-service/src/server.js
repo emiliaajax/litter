@@ -1,23 +1,21 @@
-/**
- * The starting point of the application.
- *
- * @author Emilia Hansson <eh222yn@student.lnu.se>
- * @author Oliwer Ellréus <oe222ez@student.lnu.se>
- * @version 1.0.0
- */
-
 import express from 'express'
 import logger from 'morgan'
-import helmet from 'helmet'
-
 import { router } from './routes/router.js'
+import { connectDB } from './config/mongoose.js'
+import helmet from 'helmet'
+import cors from 'cors'
 
 try {
+  // Connects to MongoDB.
+  await connectDB()
+
   // Creates an Express application.
   const app = express()
 
   // Sets HTTP headers to make application more secure.
   app.use(helmet())
+
+  app.use(cors())
 
   // Sets up a morgan logger using the dev format for log entries.
   app.use(logger('dev'))
@@ -26,17 +24,13 @@ try {
   app.use(express.json())
 
   // Registers routes.
-  app.use(process.env.BASE_URL, router)
+  app.use('/lits', router)
 
   // Error handler.
   app.use(function (err, req, res, next) {
     err.status = err.status || 500
 
     if (req.app.get('env') !== 'development') {
-      if (err.status === 500) {
-        err.message = 'An unexpected condition was encountered.'
-      }
-
       return res
         .status(err.status)
         .json({
