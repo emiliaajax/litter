@@ -16,10 +16,10 @@ spec:
                 name: client
                 port:
                   number: 8888
-          - path: /lits
+          - path: /litter
             pathType: Prefix
             backend:
               service:
-                name: lits
+                name: litter
                 port:
                   number: 8888

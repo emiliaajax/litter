@@ -17,15 +17,6 @@ export const getHundredLatestLits = createAsyncThunk('lits/latest', async (thunk
   }
 })
 
-// export const getLitsById = createAsyncThunk('lits/id', async (id, thunkAPI) => {
-//   try {
-//     return await litsService.getLitsById(id)
-//   } catch (error) {
-//     const message = error.response.data.message || (error.response && error.response.data && error.response.message) || error.message || error.toString()
-//     return thunkAPI.rejectWithValue(message)
-//   }
-// })
-
 export const getUserLits = createAsyncThunk('lits/id', async (id, thunkAPI) => {
   try {
     return await litsService.getUserLits(id)
@@ -82,22 +73,6 @@ export const litsSlice = createSlice({
       .addCase(getHundredLatestLits.pending, (state) => {
         state.isPending = true
       })
-      // .addCase(getLitsById.fulfilled, (state, action) => {
-      //   state.isSuccess = true
-      //   state.isError = false
-      //   state.lits = action.payload
-      //   state.isPending = false
-      // })
-      // .addCase(getLitsById.rejected, (state, action) => {
-      //   state.isError = true
-      //   state.message = action.payload
-      //   state.isSuccess = false
-      //   state.lits = null
-      //   state.isPending = false
-      // })
-      // .addCase(getLitsById.pending, (state) => {
-      //   state.isPending = true
-      // })
       .addCase(getUserLits.fulfilled, (state, action) => {
         state.isSuccess = true
         state.isError = false

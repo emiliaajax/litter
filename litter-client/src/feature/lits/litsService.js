@@ -10,6 +10,22 @@ const litsAxios = axios.create({
   }
 })
 
+litsAxios.interceptors.response.use((response) => {
+  return response 
+}, async function(error) {
+  const originalRequest = error.config
+
+  if (error.response.status === 401 && !originalRequest._retry) {
+    originalRequest._retry = true
+    const user = JSON.parse(localStorage.getItem('user'))
+    originalRequest.headers.Authorization = 'Bearer ' + user.access_token
+    return litsAxios(originalRequest)
+  }
+
+  return Promise.reject(error)
+})
+
+
 const getHundredLatestLits = async () => {
   const response = await litsAxios(
     { method: 'GET' }
@@ -20,8 +36,6 @@ const getHundredLatestLits = async () => {
 
     lit.author = author.user.username
   }
-
-  console.log(response.data)
 
   return response.data
 }
