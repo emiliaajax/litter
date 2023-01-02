@@ -164,10 +164,10 @@ deploy:
     - kubectl create secret docker-registry regcred --docker-server=$CI_REGISTRY --docker-username=$CI_DEPLOY_USER --docker-password=$CI_DEPLOY_PASSWORD
     # Auth-secrets.
     - kubectl delete secret auth-secrets || true
-    - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY_STAGING --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY_STAGING
+    - kubectl create secret generic auth-secrets --from-literal=JWT_PRIVATE_KEY=$JWT_PRIVATE_KEY --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY
     # Lits-secrets
     - kubectl delete secret lits-secrets || true
-    - kubectl create secret generic lits-secrets --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY_STAGING
+    - kubectl create secret generic lits-secrets --from-literal=JWT_PUBLIC_KEY=$JWT_PUBLIC_KEY
 
 
     - kubectl apply 
