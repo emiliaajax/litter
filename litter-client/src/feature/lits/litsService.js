@@ -95,7 +95,10 @@ const getAllLitsForLitterBox = async () => {
 const postLit = async (litData) => {
   const response = await litsAxios({
     method: 'POST',
-    data: litData
+    data: litData,
+    headers: {
+      Authorization: `Bearer ${JSON.parse(localStorage.getItem('user')) ? JSON.parse(localStorage.getItem('user')).access_token : ''}`
+    }
   })
 
   return response.data
