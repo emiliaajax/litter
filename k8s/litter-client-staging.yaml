@@ -32,8 +32,9 @@ spec:
     spec:
       containers:
       - name: client
-        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter-client-staging:latest
-        imagePullPolicy: Always
+        # image: client-staging # Dev
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter-client-staging:latest # Prod
+        imagePullPolicy: Always # Prod
         env:
           - name: PORT
             value: "8080"
@@ -42,38 +43,7 @@ spec:
           - name: NODE_ENV
             value: "staging"
         ports:
-          - containerPort: 8080
-      #   volumeMounts:
-      #     - name: nginx-config
-      #       mountPath: /etc/nginx/
-      # volumes:
-      #   - name: nginx-config
-      #     configMap:
-      #       name: nginx-config      
+          - containerPort: 8080     
       imagePullSecrets:
       - name: regcred
 ---
-# apiVersion: v1
-# kind: ConfigMap
-# metadata:
-#   name: nginx-config
-#   namespace: default
-# data:
-#   nginx.conf: |
-#     events {
-#       worker_connections  1024;  ## Default
-#     }
-
-#     http {
-#       server {
-#         listen 8080;
-#         listen [::]:8080;
-
-#         root /usr/share/nginx/html;
-#         index index.html;
-
-#         location / {
-#           try_files $uri /index.html;
-#         }
-#       }
-#     }
