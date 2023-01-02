@@ -45,6 +45,8 @@ spec:
           value: "3000"
         - name: BASE_URL
           value: "/litter/"
+        - name: ORIGINS
+          value: "http://cscloud6-55.lnu.se,http://cscloud7-17.lnu.se"
         ports:
           - containerPort: 8080
       imagePullSecrets:

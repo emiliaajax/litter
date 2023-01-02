@@ -9,6 +9,7 @@
 import express from 'express'
 import logger from 'morgan'
 import helmet from 'helmet'
+import cors from 'cors'
 
 import { router } from './routes/router.js'
 
@@ -18,6 +19,18 @@ try {
 
   // Sets HTTP headers to make application more secure.
   app.use(helmet())
+
+  // Allow client
+  const allowedOrigins = process.env.ORIGINS.split(',')
+  app.use(cors({
+    origin: function(origin, callback) {
+      if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    }
+  }))
 
   // Sets up a morgan logger using the dev format for log entries.
   app.use(logger('dev'))
