@@ -10,6 +10,7 @@ import StarIcon from '@mui/icons-material/Star'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { logout, reset } from '../../feature/auth/authSlice'
+import { Link } from 'react-router-dom'
 
 const SideBar = () => {
   const { user } = useSelector((state) => state.auth)
@@ -28,8 +29,8 @@ const SideBar = () => {
     <Box sx={{ width: '100%', paddingTop: '20px', maxWidth: '190px', bgcolor: 'background.paper' }}>
       <List component='nav'>
         <ListItemButton
-          component='a'
-          href='/'
+          component={Link}
+          to='/'
         >
           <ListItemIcon>
             <HomeIcon />
@@ -40,8 +41,8 @@ const SideBar = () => {
           />
         </ListItemButton>
         <ListItemButton
-          component='a'
-          href='/explore'
+          component={Link}
+          to='/explore'
         >
           <ListItemIcon>
             <StarIcon />
@@ -52,8 +53,8 @@ const SideBar = () => {
           />
         </ListItemButton>
         <ListItemButton
-          component='a'
-          href={userUrl}
+          component={Link}
+          to={userUrl}
         >
           <ListItemIcon>
             <AccountCircleIcon />
