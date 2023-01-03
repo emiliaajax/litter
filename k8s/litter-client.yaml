@@ -32,9 +32,9 @@ spec:
     spec:
       containers:
       - name: client
-        image: client # Dev
-        # image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter-client:latest # Prod
-        # imagePullPolicy: Always # Prod
+        # image: client # Dev
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter-client:latest # Prod
+        imagePullPolicy: Always # Prod
         env:
           - name: PORT
             value: "8080"

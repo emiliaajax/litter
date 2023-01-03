@@ -17,9 +17,9 @@ spec:
     spec:
       containers:
       - name: auth-service
-        # image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/auth-service:latest
-        # imagePullPolicy: Always
-        image: auth-service
+        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/auth-service:latest
+        imagePullPolicy: Always
+        # image: auth-service
         env:
         - name: DB_CONNECTION_STRING
           value: "mongodb://mongodb:27017/users"
