@@ -32,9 +32,9 @@ spec:
     spec:
       containers:
       - name: litter
-        image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter:latest # Prod
-        # image: litter # Dev
-        imagePullPolicy: Always # Prod
+        # image: gitlab.lnu.se:5050/2dv013/student/team-2-bengal/litter/litter:latest # Prod
+        image: litter # Dev
+        # imagePullPolicy: Always # Prod
         env:
         - name: PORT
           value: "8080"
@@ -46,7 +46,7 @@ spec:
         - name: BASE_URL
           value: "/litter/"
         - name: ORIGINS
-          value: "http://cscloud6-55.lnu.se,http://cscloud7-17.lnu.se"
+          value: "http://cscloud6-55.lnu.se,http://cscloud7-17.lnu.se,http://localhost"
         ports:
           - containerPort: 8080
       imagePullSecrets:

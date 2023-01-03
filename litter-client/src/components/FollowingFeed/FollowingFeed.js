@@ -2,6 +2,7 @@ import { Avatar, Card, CardHeader, Stack } from '@mui/material'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { getFollowings } from '../../feature/auth/authSlice.js'
+import { Link } from 'react-router-dom'
 
 const FollowingFeed = () => {
   const dispatch = useDispatch()
@@ -36,9 +37,9 @@ const FollowingFeed = () => {
                   </Avatar>
                 }
                 title={
-                  <a style={{ textDecoration: 'none', color: 'black' }} href={'/' + following.id}>
+                  <Link style={{ textDecoration: 'none', color: 'black' }} to={'/' + following.id}>
                     {following.username}
-                  </a>
+                  </Link>
                 }
               />
             </Card>

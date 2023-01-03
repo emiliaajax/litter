@@ -3,6 +3,7 @@ import { Box } from '@mui/system'
 import profileImage from './profile-image.png'
 import Avatar from '@mui/material/Avatar'
 import dateFormat from 'dateformat'
+import { Link } from 'react-router-dom'
 
 const LitCard = (props) => {
   const lit = props.lit
@@ -23,9 +24,9 @@ const LitCard = (props) => {
             </Avatar>
           }
           title={
-            <a style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }} href={authorPageUrl}>
+            <Link style={{ textDecoration: 'none', color: 'black', fontWeight: 'bold' }} to={authorPageUrl}>
               {lit.author}
-            </a>
+            </Link>
           }
           subheader={date}
         />
